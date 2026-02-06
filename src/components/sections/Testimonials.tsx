@@ -1,164 +1,135 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { staggerContainer, fadeUp } from "@/lib/animations";
-import { Card } from "@/components/ui/Card";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote:
-      "Seit der Zusammenarbeit mit Blue Monkeys haben wir nicht nur mehr Patienten, sondern vor allem die richtigen Patienten. Die Qualität der Anfragen ist spürbar gestiegen.",
+    quote: "Blue Monkeys hat unsere Online-Präsenz komplett transformiert. Die Qualität der Anfragen ist spürbar gestiegen — wir bekommen jetzt die Patienten, die wirklich zu uns passen.",
     author: "Dr. Thomas Müller",
     role: "Zahnarzt",
     location: "Wien",
-    image: "/testimonials/1.jpg",
+    rating: 5,
   },
   {
-    quote:
-      "Endlich eine Agentur, die versteht, wie Arztpraxen ticken. Keine leeren Versprechungen, sondern messbare Ergebnisse. Unser ROI war nach 4 Monaten positiv.",
+    quote: "Endlich eine Agentur, die unsere Sprache spricht. Keine leeren Versprechen, nur messbare Ergebnisse. Unser ROI war nach 4 Monaten im Plus.",
     author: "Dr. Anna Weber",
     role: "Allgemeinmedizinerin",
     location: "Salzburg",
-    image: "/testimonials/2.jpg",
+    rating: 5,
   },
   {
-    quote:
-      "Der KI-Chatbot hat unsere Rezeption komplett entlastet. 60% der Terminanfragen laufen jetzt automatisch — rund um die Uhr.",
+    quote: "Der KI-Chatbot hat unsere Rezeption komplett entlastet. 60% der Terminanfragen laufen automatisch — rund um die Uhr, ohne Wartezeiten.",
     author: "Dr. Michael Berger",
     role: "Kieferorthopäde",
     location: "Graz",
-    image: "/testimonials/3.jpg",
-  },
-  {
-    quote:
-      "Professionell, schnell, kreativ. Die neue Website war in 6 Wochen fertig und sieht besser aus als alles, was die Konkurrenz hat.",
-    author: "Dr. Sarah Klein",
-    role: "Dermatologin",
-    location: "Wien",
-    image: "/testimonials/4.jpg",
+    rating: 5,
   },
 ];
 
 export function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+  const variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 100 : -100,
       opacity: 0,
+      scale: 0.95,
     }),
     center: {
       x: 0,
       opacity: 1,
+      scale: 1,
     },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
+    exit: (dir: number) => ({
+      x: dir < 0 ? 100 : -100,
       opacity: 0,
+      scale: 0.95,
     }),
   };
 
-  const paginate = (newDirection: number) => {
-    setDirection(newDirection);
+  const paginate = (newDir: number) => {
+    setDirection(newDir);
     setCurrent((prev) => {
-      let next = prev + newDirection;
+      let next = prev + newDir;
       if (next < 0) next = testimonials.length - 1;
       if (next >= testimonials.length) next = 0;
       return next;
     });
   };
 
-  // Auto-advance
   useEffect(() => {
-    const interval = setInterval(() => {
-      paginate(1);
-    }, 6000);
+    const interval = setInterval(() => paginate(1), 6000);
     return () => clearInterval(interval);
   }, [current]);
 
   return (
-    <section className="section bg-bm-black text-white overflow-hidden">
-      <motion.div
-        className="container-lg px-4 md:px-8"
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
-      >
-        {/* Header */}
-        <motion.div variants={fadeUp} className="text-center mb-16">
-          <h2 className="text-display mb-4">Das sagen unsere Kunden.</h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Nicht wir reden über uns — unsere Kunden tun es.
-          </p>
-        </motion.div>
-
-        {/* Testimonial Carousel */}
-        <motion.div variants={fadeUp} className="max-w-4xl mx-auto relative">
+    <section className="section bg-bm-dark" ref={ref}>
+      <div className="container">
+        <motion.div
+          className="max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
           {/* Quote Icon */}
-          <div className="absolute -top-8 left-0 md:left-8">
-            <Quote className="w-16 h-16 text-bm-blue/20" />
+          <div className="flex justify-center mb-8">
+            <div className="w-16 h-16 rounded-2xl bg-bm-blue/10 border border-bm-blue/20 flex items-center justify-center">
+              <Quote className="w-8 h-8 text-bm-blue" />
+            </div>
           </div>
 
-          {/* Carousel */}
-          <div className="relative h-[320px] md:h-[280px]">
+          {/* Testimonial Carousel */}
+          <div className="relative min-h-[280px]">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={current}
                 custom={direction}
-                variants={slideVariants}
+                variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="absolute inset-0"
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center"
               >
-                <Card
-                  className="h-full bg-white/5 border border-white/10"
-                  padding="lg"
-                  hover={false}
-                >
-                  <div className="flex flex-col h-full justify-between">
-                    {/* Quote */}
-                    <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8">
-                      "{testimonials[current].quote}"
-                    </p>
+                {/* Stars */}
+                <div className="flex justify-center gap-1 mb-6">
+                  {[...Array(testimonials[current].rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                  ))}
+                </div>
 
-                    {/* Author */}
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-bm-blue to-bm-blue-dark flex items-center justify-center text-xl font-bold">
-                        {testimonials[current].author
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-white">
-                          {testimonials[current].author}
-                        </div>
-                        <div className="text-white/60 text-sm">
-                          {testimonials[current].role} • {testimonials[current].location}
-                        </div>
-                      </div>
-                    </div>
+                {/* Quote */}
+                <blockquote className="text-2xl md:text-3xl font-light text-white leading-relaxed mb-8">
+                  "{testimonials[current].quote}"
+                </blockquote>
+
+                {/* Author */}
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-bm-blue to-bm-purple flex items-center justify-center text-white font-bold text-lg mb-2">
+                    {testimonials[current].author.split(" ").map((n) => n[0]).join("")}
                   </div>
-                </Card>
+                  <div className="font-semibold text-white">{testimonials[current].author}</div>
+                  <div className="text-sm text-bm-gray-400">
+                    {testimonials[current].role} • {testimonials[current].location}
+                  </div>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-8">
-            <motion.button
+            <button
               onClick={() => paginate(-1)}
-              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full bg-bm-card border border-bm-border hover:border-bm-border-light hover:bg-bm-card-hover transition-all"
             >
               <ChevronLeft className="w-5 h-5" />
-            </motion.button>
+            </button>
 
             {/* Dots */}
             <div className="flex gap-2">
@@ -169,26 +140,24 @@ export function Testimonials() {
                     setDirection(i > current ? 1 : -1);
                     setCurrent(i);
                   }}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 ${
                     i === current
                       ? "w-8 bg-bm-blue"
-                      : "bg-white/30 hover:bg-white/50"
+                      : "w-2 bg-bm-gray-600 hover:bg-bm-gray-500"
                   }`}
                 />
               ))}
             </div>
 
-            <motion.button
+            <button
               onClick={() => paginate(1)}
-              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full bg-bm-card border border-bm-border hover:border-bm-border-light hover:bg-bm-card-hover transition-all"
             >
               <ChevronRight className="w-5 h-5" />
-            </motion.button>
+            </button>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,145 +1,149 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { staggerContainer, fadeUp } from "@/lib/animations";
-import { Card } from "@/components/ui/Card";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import {
   Globe,
   Search,
   Megaphone,
   Palette,
   Bot,
-  TrendingUp,
+  BarChart3,
   ArrowUpRight,
+  Sparkles,
 } from "lucide-react";
 
 const services = [
   {
     icon: Globe,
-    title: "Praxis-Websites",
-    description:
-      "Maßgeschneidertes Design, das Ihre Praxis repräsentiert und Patienten überzeugt. Schnell, mobil-optimiert, barrierefrei.",
-    features: ["Responsive Design", "Termin-Integration", "DSGVO-konform"],
-    color: "from-blue-500 to-cyan-500",
+    title: "Praxis Websites",
+    description: "Individuelles Design, das Vertrauen schafft. Schnell, mobil-optimiert, barrierefrei.",
+    color: "from-blue-500 to-cyan-400",
+    span: "span-2",
+    featured: true,
   },
   {
     icon: Search,
     title: "SEO",
-    description:
-      '"Zahnarzt Wien" — wenn Patienten suchen, sollten Sie gefunden werden. Lokale SEO, Google My Business, Content der rankt.',
-    features: ["Lokale SEO", "Google My Business", "Content-Strategie"],
-    color: "from-emerald-500 to-teal-500",
+    description: "Gefunden werden, wenn Patienten suchen.",
+    color: "from-emerald-500 to-teal-400",
+    span: "",
   },
   {
     icon: Megaphone,
-    title: "Google & Meta Ads",
-    description:
-      "Gezielt die richtigen Patienten ansprechen. Messbar, skalierbar, profitabel. Sie kümmern sich um Patienten, wir um Werbung.",
-    features: ["Google Ads", "Meta Ads", "Retargeting"],
-    color: "from-orange-500 to-red-500",
-  },
-  {
-    icon: Palette,
-    title: "Branding & Design",
-    description:
-      "Von der Visitenkarte bis zur Praxisbeschilderung. Ein konsistentes Erscheinungsbild, das Vertrauen schafft.",
-    features: ["Logo-Design", "Praxis-CI", "Drucksachen"],
-    color: "from-purple-500 to-pink-500",
+    title: "Ads",
+    description: "Google & Meta Ads mit messbarem ROI.",
+    color: "from-orange-500 to-amber-400",
+    span: "",
   },
   {
     icon: Bot,
-    title: "KI-Assistenten",
-    description:
-      "Chatbots für Terminanfragen, automatisierte Patientenkommunikation, intelligente Workflows. Die Zukunft der Praxisorganisation.",
-    features: ["Chatbots", "Automatisierung", "24/7 Erreichbar"],
-    color: "from-bm-blue to-indigo-500",
+    title: "KI Assistenten",
+    description: "Automatisierte Terminbuchung, 24/7 Erreichbarkeit, intelligente Chatbots.",
+    color: "from-violet-500 to-purple-400",
+    span: "span-2 row-2",
+    featured: true,
   },
   {
-    icon: TrendingUp,
-    title: "Laufende Betreuung",
-    description:
-      "Monatliche Optimierung, Reporting, Support. Wir bleiben dran, damit Ihre Praxis wächst.",
-    features: ["Monatliche Reports", "Laufende Optimierung", "Persönlicher Support"],
-    color: "from-amber-500 to-orange-500",
+    icon: Palette,
+    title: "Branding",
+    description: "Corporate Identity die bleibt.",
+    color: "from-pink-500 to-rose-400",
+    span: "",
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics",
+    description: "Datengetriebene Entscheidungen.",
+    color: "from-indigo-500 to-blue-400",
+    span: "",
   },
 ];
 
-export function Services() {
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
   return (
-    <section id="services" className="section bg-bm-gray-50">
-      <motion.div
-        className="container-lg"
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-      >
+    <motion.div
+      ref={ref}
+      className={`bento-item ${service.span}`}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className={`card h-full p-6 flex flex-col group cursor-pointer ${service.featured ? 'justify-between' : ''}`}>
+        {/* Icon */}
+        <div
+          className={`icon-container bg-gradient-to-br ${service.color} mb-4 group-hover:scale-110 transition-transform duration-500`}
+        >
+          <service.icon className="w-5 h-5 text-white" />
+        </div>
+
+        {/* Content */}
+        <div className="flex-1">
+          <div className="flex items-start justify-between mb-2">
+            <h3 className="text-title text-white">{service.title}</h3>
+            <ArrowUpRight className="w-5 h-5 text-bm-gray-500 group-hover:text-bm-blue group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+          </div>
+          <p className="text-bm-gray-400 text-sm leading-relaxed">{service.description}</p>
+        </div>
+
+        {/* Featured Extra Content */}
+        {service.featured && (
+          <div className="mt-6 pt-4 border-t border-bm-border">
+            <div className="flex items-center gap-2 text-sm text-bm-blue">
+              <Sparkles className="w-4 h-4" />
+              <span>Beliebteste Leistung</span>
+            </div>
+          </div>
+        )}
+
+        {/* Hover Glow */}
+        <div className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.06), transparent 40%)`,
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
+export function Services() {
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
+
+  return (
+    <section id="services" className="section">
+      <div className="container">
         {/* Header */}
-        <motion.div variants={fadeUp} className="text-center mb-16">
-          <h2 className="text-display text-bm-black mb-4">
-            Alles aus einer Hand.
+        <motion.div
+          ref={headerRef}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="badge mb-4">
+            <Sparkles className="w-4 h-4" />
+            Full Service
+          </span>
+          <h2 className="text-display text-gradient mb-4">
+            Alles. Aus einer Hand.
           </h2>
-          <p className="text-xl text-bm-gray-400 max-w-2xl mx-auto">
-            Kein Jonglieren mit verschiedenen Agenturen. Wir kümmern uns um
-            alles, was Ihre Praxis digital braucht.
+          <p className="text-body max-w-xl mx-auto">
+            Kein Agentur-Hopping. Ein Partner für alles Digitale.
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Bento Grid */}
+        <div className="bento-grid">
           {services.map((service, i) => (
-            <motion.div
-              key={service.title}
-              variants={fadeUp}
-              custom={i}
-              transition={{ delay: i * 0.1 }}
-            >
-              <Card
-                className="h-full group"
-                padding="lg"
-                hover
-                glow
-              >
-                {/* Icon */}
-                <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} 
-                              flex items-center justify-center mb-5 
-                              group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <service.icon className="w-6 h-6 text-white" />
-                </div>
-
-                {/* Title with Arrow */}
-                <div className="flex items-center gap-2 mb-3">
-                  <h3 className="text-xl font-bold text-bm-black">
-                    {service.title}
-                  </h3>
-                  <ArrowUpRight
-                    className="w-5 h-5 text-bm-gray-300 group-hover:text-bm-blue 
-                               group-hover:translate-x-1 group-hover:-translate-y-1 
-                               transition-all duration-300"
-                  />
-                </div>
-
-                {/* Description */}
-                <p className="text-bm-gray-400 mb-5">{service.description}</p>
-
-                {/* Features */}
-                <div className="flex flex-wrap gap-2">
-                  {service.features.map((feature) => (
-                    <span
-                      key={feature}
-                      className="text-sm px-3 py-1 bg-bm-gray-100 text-bm-gray-500 rounded-full"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </Card>
-            </motion.div>
+            <ServiceCard key={service.title} service={service} index={i} />
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

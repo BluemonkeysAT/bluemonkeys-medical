@@ -1,100 +1,103 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Button } from "@/components/ui/Button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Sparkles, Zap } from "lucide-react";
+import Link from "next/link";
 
 export function CTABanner() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: ref,
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={containerRef} className="py-16 md:py-24 overflow-hidden">
-      <motion.div className="container-lg px-4 md:px-8" style={{ y }}>
-        <div className="relative rounded-3xl overflow-hidden">
+    <section ref={ref} className="section overflow-hidden">
+      <div className="container">
+        <motion.div
+          className="relative overflow-hidden rounded-3xl"
+          style={{ opacity }}
+        >
           {/* Background */}
-          <div className="absolute inset-0 gradient-bg" />
+          <div className="absolute inset-0 bg-gradient-to-br from-bm-blue via-bm-purple to-bm-pink" />
           
-          {/* Noise Overlay */}
-          <div className="absolute inset-0 noise" />
-
-          {/* Animated Shapes */}
+          {/* Animated Orbs */}
           <motion.div
-            className="absolute -top-1/2 -right-1/4 w-[400px] h-[400px] rounded-full bg-white/10 blur-3xl"
+            className="absolute -top-1/2 -right-1/4 w-[500px] h-[500px] rounded-full bg-white/10 blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
+              rotate: [0, 180, 360],
             }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
-            className="absolute -bottom-1/2 -left-1/4 w-[300px] h-[300px] rounded-full bg-white/10 blur-3xl"
+            className="absolute -bottom-1/2 -left-1/4 w-[400px] h-[400px] rounded-full bg-black/10 blur-3xl"
             animate={{
               scale: [1.2, 1, 1.2],
-              rotate: [0, -90, 0],
             }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {/* Grid Pattern */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "40px 40px",
             }}
           />
 
           {/* Content */}
-          <div className="relative z-10 px-8 py-16 md:py-24 text-center text-white">
+          <div className="relative z-10 px-8 py-20 md:py-28 text-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                Kostenlose Erstberatung
-              </div>
+              {/* Badge */}
+              <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium px-4 py-2 rounded-full mb-8">
+                <Zap className="w-4 h-4" />
+                Jetzt starten
+              </span>
 
-              <h2 className="text-display max-w-3xl mx-auto mb-6">
-                Starten Sie jetzt — und überholen Sie Ihre Konkurrenz.
+              {/* Headline */}
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl mx-auto leading-tight">
+                Bereit, Ihre Konkurrenz zu überholen?
               </h2>
 
-              <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
-                Während andere noch überlegen, könnten Sie schon mehr Patienten
-                gewinnen. Der erste Schritt ist ein Gespräch.
+              {/* Subline */}
+              <p className="text-xl text-white/80 max-w-xl mx-auto mb-10">
+                Während andere noch überlegen, könnten Sie schon mehr Patienten gewinnen.
               </p>
 
+              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  variant="secondary"
+                <Link
                   href="#contact"
-                  className="bg-white text-bm-blue hover:bg-white/90"
-                  icon={<ArrowRight className="w-5 h-5" />}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-bm-black font-semibold rounded-xl hover:bg-white/90 transition-colors"
                 >
-                  Jetzt Termin vereinbaren
-                </Button>
-                <Button
-                  size="lg"
-                  variant="ghost"
+                  Kostenlose Beratung
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a
                   href="tel:+4315555555"
-                  className="text-white hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium rounded-xl hover:bg-white/20 transition-colors"
                 >
-                  Oder anrufen: +43 1 555 55 55
-                </Button>
+                  +43 1 555 55 55
+                </a>
               </div>
             </motion.div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -10,25 +10,28 @@ const inter = Inter({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Praxis-Marketing für Ärzte & Zahnärzte | Blue Monkeys Medical",
+  title: "Blue Monkeys Medical | Premium Marketing für Arztpraxen",
   description:
-    "Websites, SEO und Werbung speziell für Arztpraxen und Zahnarztpraxen. Full-Service Agentur aus Wien. Jetzt kostenlose Erstberatung.",
+    "Websites, SEO und Werbung speziell für Ärzte und Zahnärzte. Full-Service Agentur aus Wien. Mehr Patienten. Bessere Patienten.",
   keywords: [
     "Praxis-Marketing",
     "Arzt Website",
     "Zahnarzt Website",
     "SEO für Ärzte",
     "Medical Marketing",
-    "Praxis-Website",
     "Wien",
-    "Österreich",
   ],
   authors: [{ name: "Blue Monkeys" }],
   openGraph: {
-    title: "Praxis-Marketing für Ärzte & Zahnärzte | Blue Monkeys Medical",
-    description:
-      "Websites, SEO und Werbung speziell für Arztpraxen. Full-Service Agentur aus Wien.",
+    title: "Blue Monkeys Medical | Premium Marketing für Arztpraxen",
+    description: "Websites, SEO und Werbung speziell für Arztpraxen. Full-Service Agentur aus Wien.",
     url: "https://medical.bluemonkeys.at",
     siteName: "Blue Monkeys Medical",
     locale: "de_AT",
@@ -36,30 +39,26 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Praxis-Marketing für Ärzte & Zahnärzte",
-    description: "Full-Service Digital-Agentur für Arztpraxen aus Wien.",
+    title: "Blue Monkeys Medical",
+    description: "Premium Marketing für Arztpraxen aus Wien.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#6798df",
+  themeColor: "#0a0a0b",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={inter.variable}>
-      <body className="font-sans">
+    <html lang="de" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-sans antialiased">
+        {/* Noise Overlay */}
+        <div className="noise" />
+        
         <Header />
         <main>{children}</main>
         <Footer />

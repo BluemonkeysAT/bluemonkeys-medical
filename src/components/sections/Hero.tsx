@@ -1,17 +1,66 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { ArrowRight, Play, Sparkles } from "lucide-react";
-import { staggerContainer, fadeUp } from "@/lib/animations";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { ArrowRight, Play, Sparkles, Zap, TrendingUp, Users } from "lucide-react";
+import Link from "next/link";
 
 const stats = [
-  { value: "150+", label: "Praxen betreut" },
-  { value: "40%", label: "mehr Anfragen" },
-  { value: "10+", label: "Jahre Erfahrung" },
+  { value: "150+", label: "Praxen betreut", icon: Users },
+  { value: "47%", label: "Mehr Anfragen", icon: TrendingUp },
+  { value: "3.2x", label: "ROI im Schnitt", icon: Zap },
 ];
+
+function AnimatedText({ children, delay = 0 }: { children: string; delay?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <span ref={ref} className="inline-block overflow-hidden">
+      <motion.span
+        className="inline-block"
+        initial={{ y: "100%", opacity: 0 }}
+        animate={isInView ? { y: 0, opacity: 1 } : {}}
+        transition={{
+          duration: 0.8,
+          delay,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+function MagneticButton({ children, href }: { children: React.ReactNode; href: string }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouse = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current!.getBoundingClientRect();
+    const x = (clientX - left - width / 2) * 0.15;
+    const y = (clientY - top - height / 2) * 0.15;
+    setPosition({ x, y });
+  };
+
+  const reset = () => setPosition({ x: 0, y: 0 });
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className="btn-primary"
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15 }}
+    >
+      <span className="flex items-center gap-2">{children}</span>
+    </motion.a>
+  );
+}
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,145 +69,137 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), {
+    stiffness: 100,
+    damping: 30,
+  });
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  
-  const smoothY = useSpring(y, { stiffness: 100, damping: 30 });
-  const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 30 });
-  const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 mesh-bg" />
-      
-      {/* Animated Gradient Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-bm-blue/20 blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] rounded-full bg-bm-success/10 blur-3xl"
-          animate={{
-            x: [0, -30, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+      {/* Background Effects */}
+      <div className="aurora" />
+      <div className="mesh-gradient" />
+      <div className="grid-pattern" />
 
-      {/* Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-30" />
+      {/* Floating Orbs */}
+      <motion.div
+        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-bm-blue/20 to-bm-purple/20 blur-3xl"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-bm-cyan/10 to-bm-pink/10 blur-3xl"
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 40, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       {/* Content */}
       <motion.div
-        className="container-lg px-4 md:px-8 pt-24 pb-16 md:py-32 relative z-10"
-        style={{ y: smoothY, opacity: smoothOpacity, scale: smoothScale }}
+        className="relative z-10 container px-6 text-center"
+        style={{ y, opacity, scale }}
       >
+        {/* Badge */}
         <motion.div
-          className="max-w-4xl mx-auto text-center"
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-8"
         >
-          {/* Badge */}
-          <motion.div variants={fadeUp} className="mb-6">
-            <Badge icon={<Sparkles className="w-3.5 h-3.5" />} pulse>
-              Premium Agentur für Ärzte & Zahnärzte
-            </Badge>
-          </motion.div>
+          <span className="badge badge-pulse pl-6">
+            <Sparkles className="w-4 h-4" />
+            Premium Medical Marketing
+          </span>
+        </motion.div>
 
-          {/* Headline */}
-          <motion.h1
-            variants={fadeUp}
-            className="text-hero text-bm-black mb-6"
-          >
-            Ihre Praxis verdient
-            <br />
-            <span className="gradient-text">mehr Patienten.</span>
-          </motion.h1>
+        {/* Headline */}
+        <h1 className="text-hero mb-6">
+          <AnimatedText delay={0.3}>Ihre Praxis.</AnimatedText>
+          <br />
+          <span className="text-gradient-blue">
+            <AnimatedText delay={0.4}>Unser Fokus.</AnimatedText>
+          </span>
+        </h1>
 
-          {/* Subline */}
-          <motion.p
-            variants={fadeUp}
-            className="text-xl md:text-2xl text-bm-gray-400 mb-10 max-w-2xl mx-auto text-balance"
-          >
-            Websites, SEO und Werbung speziell für Arztpraxen. 
-            Von der Agentur, die weiß was funktioniert.
-          </motion.p>
+        {/* Subline */}
+        <motion.p
+          className="text-body max-w-2xl mx-auto mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          Wir bauen digitale Erlebnisse, die Patienten anziehen und Ihre Praxis
+          auf das nächste Level heben. Websites, SEO, Ads — alles aus einer Hand.
+        </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-          >
-            <Button size="lg" href="#contact" icon={<ArrowRight className="w-5 h-5" />}>
-              Kostenlose Erstberatung
-            </Button>
-            <Button
-              size="lg"
-              variant="ghost"
-              href="#cases"
-              icon={<Play className="w-5 h-5" />}
-              iconPosition="left"
+        {/* CTAs */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <MagneticButton href="#contact">
+            Projekt starten
+            <ArrowRight className="w-4 h-4" />
+          </MagneticButton>
+
+          <Link href="#cases" className="btn-secondary">
+            <Play className="w-4 h-4" />
+            Case Studies
+          </Link>
+        </motion.div>
+
+        {/* Stats */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-8 md:gap-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1 + i * 0.1 }}
             >
-              Case Studies ansehen
-            </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-wrap justify-center gap-8 md:gap-16"
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 + i * 0.1 }}
-              >
-                <div className="text-3xl md:text-4xl font-bold text-bm-blue mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-bm-gray-400">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+              <div className="stat-value mb-1">{stat.value}</div>
+              <div className="text-sm text-bm-gray-400 flex items-center gap-1.5 justify-center">
+                <stat.icon className="w-3.5 h-3.5" />
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
       >
         <motion.div
-          className="w-6 h-10 rounded-full border-2 border-bm-gray-300 flex justify-center pt-2"
+          className="w-6 h-10 rounded-full border-2 border-bm-gray-500 flex justify-center pt-2"
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 2, repeat: Infinity }}
         >
-          <motion.div className="w-1.5 h-3 bg-bm-blue rounded-full" />
+          <motion.div className="w-1.5 h-2 bg-bm-blue rounded-full" />
         </motion.div>
       </motion.div>
     </section>

@@ -1,139 +1,131 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { staggerContainer, fadeUp } from "@/lib/animations";
-import { Card } from "@/components/ui/Card";
-import { Target, Layers, BarChart3, Award, Check } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Target, Layers, BarChart3, Award, Check, Shield, Clock, HeartHandshake } from "lucide-react";
 
 const reasons = [
   {
     icon: Target,
-    title: "Spezialisiert",
-    description:
-      "Keine Generalisten. Wir machen nur Ärzte und Zahnärzte — und das merkt man an jedem Detail.",
-    highlight: "100% Medical Focus",
+    title: "100% Medical",
+    description: "Wir machen nur Ärzte und Zahnärzte. Das merkt man.",
   },
   {
     icon: Layers,
     title: "Full Service",
-    description:
-      "Website, SEO, Ads, Design — alles aus einer Hand. Ein Ansprechpartner, null Reibungsverlust.",
-    highlight: "Alles inklusive",
+    description: "Ein Partner. Alles inklusive. Null Reibungsverlust.",
   },
   {
     icon: BarChart3,
-    title: "Messbar",
-    description:
-      "Keine Bauchgefühl-Aussagen. Echte Zahlen, echte Ergebnisse, nachvollziehbarer ROI.",
-    highlight: "Daten-getrieben",
+    title: "Daten-Driven",
+    description: "Keine Bauchgefühl-Aussagen. Messbare Ergebnisse.",
   },
   {
     icon: Award,
     title: "Premium",
-    description:
-      "Ja, wir sind teurer als die Konkurrenz. Dafür bekommen Sie auch Premium-Qualität.",
-    highlight: "Award-winning",
+    description: "Teurer als andere. Aber auch besser.",
   },
 ];
 
 const checkpoints = [
-  "Persönlicher Ansprechpartner für jedes Projekt",
-  "Transparente Preise — keine versteckten Kosten",
-  "DSGVO-konforme Lösungen aus Österreich",
-  "Support auch nach Projektende",
+  { icon: HeartHandshake, text: "Persönlicher Ansprechpartner" },
+  { icon: Shield, text: "DSGVO-konform aus Österreich" },
+  { icon: Clock, text: "Support nach Projektende" },
 ];
 
 export function WhyUs() {
-  return (
-    <section id="about" className="section bg-bm-gray-50 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-30" />
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
 
-      <motion.div
-        className="container-lg px-4 md:px-8 relative z-10"
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-100px" }}
-      >
+  return (
+    <section id="about" className="section">
+      <div className="container">
         {/* Header */}
-        <motion.div variants={fadeUp} className="text-center mb-16">
-          <h2 className="text-display text-bm-black mb-4">
-            Warum Blue Monkeys?
+        <motion.div
+          ref={headerRef}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="badge mb-4">
+            <Award className="w-4 h-4" />
+            Warum wir
+          </span>
+          <h2 className="text-display text-gradient mb-4">
+            Andere machen Websites.
+            <br />
+            <span className="text-gradient-blue">Wir machen Praxen voll.</span>
           </h2>
-          <p className="text-xl text-bm-gray-400 max-w-2xl mx-auto">
-            Andere machen Websites. Wir machen Ihre Praxis voll.
-          </p>
         </motion.div>
 
-        {/* Reasons Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {reasons.map((reason, i) => (
-            <motion.div key={reason.title} variants={fadeUp} custom={i}>
-              <Card className="h-full" padding="lg" hover glow>
-                <div className="flex items-start gap-5">
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-xl bg-bm-blue/10 flex items-center justify-center shrink-0">
-                    <reason.icon className="w-7 h-7 text-bm-blue" />
-                  </div>
+        {/* Bento Grid for Reasons */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {reasons.map((reason, i) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-                  {/* Content */}
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-bm-black">
-                        {reason.title}
-                      </h3>
-                      <span className="text-xs font-semibold text-bm-blue bg-bm-blue/10 px-2 py-0.5 rounded-full">
-                        {reason.highlight}
-                      </span>
-                    </div>
-                    <p className="text-bm-gray-400">{reason.description}</p>
+            return (
+              <motion.div
+                key={reason.title}
+                ref={ref}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <div className="card p-6 h-full text-center group">
+                  <div className="icon-container mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <reason.icon className="w-5 h-5 text-white" />
                   </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">{reason.title}</h3>
+                  <p className="text-sm text-bm-gray-400">{reason.description}</p>
                 </div>
-              </Card>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Checkpoints */}
-        <motion.div variants={fadeUp}>
-          <Card
-            className="bg-gradient-to-br from-bm-blue to-bm-blue-dark text-white"
-            padding="lg"
-            hover={false}
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-2xl font-bold mb-4">Was Sie erwarten können:</h3>
-                <ul className="space-y-3">
+        {/* CTA Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-bm-blue via-bm-purple to-bm-pink p-px">
+            <div className="bg-bm-dark rounded-[calc(1.5rem-1px)] p-8 md:p-12">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                {/* Checkpoints */}
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold text-white mb-6">Was Sie erwarten können:</h3>
                   {checkpoints.map((point, i) => (
-                    <motion.li
-                      key={point}
+                    <motion.div
+                      key={point.text}
                       className="flex items-center gap-3"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
+                      transition={{ delay: 0.2 + i * 0.1 }}
                     >
-                      <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                        <Check className="w-4 h-4" />
+                      <div className="w-8 h-8 rounded-lg bg-bm-blue/20 flex items-center justify-center">
+                        <point.icon className="w-4 h-4 text-bm-blue" />
                       </div>
-                      <span className="text-white/90">{point}</span>
-                    </motion.li>
+                      <span className="text-bm-gray-200">{point.text}</span>
+                    </motion.div>
                   ))}
-                </ul>
-              </div>
-              <div className="flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-6xl mb-4">🇦🇹</div>
-                  <p className="text-xl font-semibold">Made in Austria</p>
-                  <p className="text-white/60">mit ❤️ aus Wien</p>
+                </div>
+
+                {/* Austria Badge */}
+                <div className="text-center md:text-right">
+                  <div className="text-6xl mb-2">🇦🇹</div>
+                  <div className="text-xl font-semibold text-white">Made in Austria</div>
+                  <div className="text-bm-gray-400">mit ❤️ aus Wien</div>
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
