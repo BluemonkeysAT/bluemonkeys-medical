@@ -1,25 +1,32 @@
-import {
-  Hero,
-  Services,
-  CaseStudies,
-  Testimonials,
+import { Header, Footer } from "@/components/layout";
+import { 
+  Hero, 
+  Problems,
+  Services, 
+  CaseStudies, 
+  Testimonials, 
   Process,
-  WhyUs,
-  Contact,
-  CTABanner,
+  FAQ,
+  Contact, 
+  CTABanner 
 } from "@/components/sections";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Services />
-      <CaseStudies />
-      <Testimonials />
-      <Process />
-      <WhyUs />
-      <CTABanner />
-      <Contact />
+      <Header />
+      <main>
+        <Hero />
+        <Problems />
+        <Services />
+        <Process />
+        <CaseStudies />
+        <Testimonials />
+        <FAQ />
+        <Contact />
+        <CTABanner />
+      </main>
+      <Footer />
     </>
   );
 }

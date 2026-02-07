@@ -15,16 +15,9 @@ const navLinks = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setIsHidden(true);
-    } else {
-      setIsHidden(false);
-    }
     setIsScrolled(latest > 50);
   });
 
@@ -35,33 +28,26 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-bm-black/80 backdrop-blur-xl border-b border-bm-border"
-            : "bg-transparent"
+            ? "bg-white/95 backdrop-blur-md shadow-sm"
+            : "bg-white"
         }`}
-        initial={{ y: 0 }}
-        animate={{ y: isHidden ? -100 : 0 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="container px-6">
+        <div className="container mx-auto px-6">
           <nav className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="relative z-10">
-              <motion.div
-                className="flex items-center gap-3"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-bm-blue to-bm-purple flex items-center justify-center">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center">
                   <span className="text-white font-bold text-lg">BM</span>
                 </div>
                 <div className="hidden sm:block">
-                  <span className="font-semibold text-white">Blue Monkeys</span>
-                  <span className="text-bm-blue font-medium ml-1">Medical</span>
+                  <span className="font-bold text-black">Blue Monkeys</span>
+                  <span className="text-[#5fdafb] font-bold ml-1">Medical</span>
                 </div>
-              </motion.div>
+              </div>
             </Link>
 
             {/* Desktop Nav */}
@@ -70,114 +56,103 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-bm-gray-300 hover:text-white text-sm font-medium transition-colors relative group"
+                  className="text-[#666] hover:text-black text-sm font-medium transition-colors relative group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bm-blue group-hover:w-full transition-all duration-300" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5fdafb] group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
             </div>
 
-            {/* CTA */}
+            {/* CTA Button */}
             <div className="hidden md:block">
-              <Link href="#contact" className="btn-primary text-sm py-2.5 px-5">
-                <span className="flex items-center gap-2">
-                  Projekt starten
-                  <ArrowRight className="w-4 h-4" />
-                </span>
+              <Link
+                href="#contact"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-black text-white text-sm font-semibold rounded hover:bg-[#5fdafb] hover:text-black transition-all duration-300"
+              >
+                Projekt starten
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
-            {/* Mobile Toggle */}
+            {/* Mobile Menu Button */}
             <button
-              className="md:hidden relative z-10 p-2"
               onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden relative z-10 p-2"
+              aria-label="Toggle menu"
             >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="w-6 h-6 text-bm-blue" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ opacity: 0, rotate: 90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: -90 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="w-6 h-6 text-white" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {isOpen ? (
+                <X className="w-6 h-6 text-black" />
+              ) : (
+                <Menu className="w-6 h-6 text-black" />
+              )}
             </button>
           </nav>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-40 md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 md:hidden"
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-bm-black/90 backdrop-blur-xl"
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Content */}
+            {/* Menu Panel */}
             <motion.div
-              className="relative h-full flex flex-col items-center justify-center gap-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.1 }}
+              className="absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-2xl"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
             >
-              {navLinks.map((link, i) => (
+              <div className="flex flex-col h-full pt-24 pb-8 px-6">
+                <nav className="flex-1">
+                  {navLinks.map((link, i) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block py-4 text-2xl font-bold text-black hover:text-[#5fdafb] transition-colors border-b border-gray-100"
+                        style={{ fontFamily: "'Rift-Bold', system-ui" }}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+
                 <motion.div
-                  key={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.05 }}
+                  transition={{ delay: 0.4 }}
                 >
                   <Link
-                    href={link.href}
-                    className="text-3xl font-semibold text-white hover:text-bm-blue transition-colors"
+                    href="#contact"
                     onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white font-semibold rounded-lg hover:bg-[#5fdafb] hover:text-black transition-all"
                   >
-                    {link.label}
+                    Projekt starten
+                    <ArrowRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
-              ))}
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mt-8"
-              >
-                <Link
-                  href="#contact"
-                  className="btn-primary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <span className="flex items-center gap-2">
-                    Projekt starten
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Link>
-              </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         )}

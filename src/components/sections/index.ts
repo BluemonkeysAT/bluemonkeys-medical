@@ -1,8 +1,9 @@
 export { Hero } from "./Hero";
+export { Problems } from "./Problems";
 export { Services } from "./Services";
 export { CaseStudies } from "./CaseStudies";
 export { Testimonials } from "./Testimonials";
 export { Process } from "./Process";
-export { WhyUs } from "./WhyUs";
+export { FAQ } from "./FAQ";
 export { Contact } from "./Contact";
 export { CTABanner } from "./CTABanner";

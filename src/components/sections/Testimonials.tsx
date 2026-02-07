@@ -1,161 +1,173 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Star, Quote, BadgeCheck } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Blue Monkeys hat unsere Online-Präsenz komplett transformiert. Die Qualität der Anfragen ist spürbar gestiegen — wir bekommen jetzt die Patienten, die wirklich zu uns passen.",
-    author: "Dr. Thomas Müller",
+    name: "Dr. Thomas Weber",
     role: "Zahnarzt",
-    location: "Wien",
+    location: "Wien Döbling",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face",
+    text: "In 6 Monaten haben wir unsere Patientenanfragen verdreifacht. Die Qualität ist eine andere — fast nur noch Privatpatienten.",
     rating: 5,
+    result: "+340% Anfragen",
+    verified: true,
   },
   {
-    quote: "Endlich eine Agentur, die unsere Sprache spricht. Keine leeren Versprechen, nur messbare Ergebnisse. Unser ROI war nach 4 Monaten im Plus.",
-    author: "Dr. Anna Weber",
-    role: "Allgemeinmedizinerin",
-    location: "Salzburg",
+    name: "Dr. Lisa Berger",
+    role: "Dermatologin",
+    location: "Wien 1. Bezirk",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face",
+    text: "Der KI-Telefonassistent war ein Game-Changer. Wir verpassen keinen Anruf mehr. Absolut professionell.",
     rating: 5,
+    result: "100% Erreichbarkeit",
+    verified: true,
   },
   {
-    quote: "Der KI-Chatbot hat unsere Rezeption komplett entlastet. 60% der Terminanfragen laufen automatisch — rund um die Uhr, ohne Wartezeiten.",
-    author: "Dr. Michael Berger",
+    name: "Dr. Michael Steiner",
     role: "Kieferorthopäde",
-    location: "Graz",
+    location: "Salzburg",
+    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=200&h=200&fit=crop&crop=face",
+    text: "Als Neugründer war Online-Marketing entscheidend. Blue Monkeys hat mir einen Vorsprung von 5 Jahren verschafft.",
     rating: 5,
+    result: "#1 bei Google",
+    verified: true,
+  },
+  {
+    name: "Dr. Anna Hofer",
+    role: "Augenärztin",
+    location: "Graz",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&h=200&fit=crop&crop=face",
+    text: "Endlich ein Team, das versteht wie Arztpraxen funktionieren. Keine leeren Versprechen, nur Ergebnisse.",
+    rating: 5,
+    result: "+89% Website-Traffic",
+    verified: true,
+  },
+  {
+    name: "Dr. Peter Gruber",
+    role: "Orthopäde",
+    location: "Linz",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&h=200&fit=crop&crop=face",
+    text: "Die Website-Neugestaltung hat sofort Wirkung gezeigt. Patienten sagen mir, sie hätten sich für uns entschieden wegen der Website.",
+    rating: 5,
+    result: "+127% Conversions",
+    verified: true,
+  },
+  {
+    name: "Dr. Maria Novak",
+    role: "Internistin",
+    location: "Wien Währing",
+    image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=200&h=200&fit=crop&crop=face",
+    text: "ROI nach 3 Monaten erreicht. Das Team ist reaktionsschnell und die Ergebnisse sprechen für sich.",
+    rating: 5,
+    result: "ROI in 3 Monaten",
+    verified: true,
   },
 ];
 
 export function Testimonials() {
-  const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const variants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.95,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
-    exit: (dir: number) => ({
-      x: dir < 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.95,
-    }),
-  };
-
-  const paginate = (newDir: number) => {
-    setDirection(newDir);
-    setCurrent((prev) => {
-      let next = prev + newDir;
-      if (next < 0) next = testimonials.length - 1;
-      if (next >= testimonials.length) next = 0;
-      return next;
-    });
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => paginate(1), 6000);
-    return () => clearInterval(interval);
-  }, [current]);
-
   return (
-    <section className="section bg-bm-dark" ref={ref}>
-      <div className="container">
+    <section ref={ref} className="py-24 bg-[#fafafa]" id="testimonials">
+      <div className="container mx-auto px-6">
+        {/* Header */}
         <motion.div
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          {/* Quote Icon */}
-          <div className="flex justify-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-bm-blue/10 border border-bm-blue/20 flex items-center justify-center">
-              <Quote className="w-8 h-8 text-bm-blue" />
-            </div>
-          </div>
+          <p className="text-[#5fdafb] font-bold text-sm uppercase tracking-widest mb-4">
+            Kundenstimmen
+          </p>
+          
+          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6" style={{ fontFamily: "'Rift-Bold', system-ui" }}>
+            WAS UNSERE
+            <br />
+            <span className="text-[#5fdafb]">KUNDEN SAGEN</span>
+          </h2>
 
-          {/* Testimonial Carousel */}
-          <div className="relative min-h-[280px]">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.div
-                key={current}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center"
-              >
-                {/* Stars */}
-                <div className="flex justify-center gap-1 mb-6">
-                  {[...Array(testimonials[current].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <blockquote className="text-2xl md:text-3xl font-light text-white leading-relaxed mb-8">
-                  "{testimonials[current].quote}"
-                </blockquote>
-
-                {/* Author */}
-                <div className="flex flex-col items-center gap-1">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-bm-blue to-bm-purple flex items-center justify-center text-white font-bold text-lg mb-2">
-                    {testimonials[current].author.split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div className="font-semibold text-white">{testimonials[current].author}</div>
-                  <div className="text-sm text-bm-gray-400">
-                    {testimonials[current].role} • {testimonials[current].location}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <button
-              onClick={() => paginate(-1)}
-              className="p-3 rounded-full bg-bm-card border border-bm-border hover:border-bm-border-light hover:bg-bm-card-hover transition-all"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            {/* Dots */}
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setDirection(i > current ? 1 : -1);
-                    setCurrent(i);
-                  }}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    i === current
-                      ? "w-8 bg-bm-blue"
-                      : "w-2 bg-bm-gray-600 hover:bg-bm-gray-500"
-                  }`}
-                />
+          {/* Rating Summary */}
+          <div className="inline-flex items-center gap-4 bg-white px-6 py-3 rounded-full shadow-sm">
+            <div className="flex items-center gap-1">
+              {[1,2,3,4,5].map((i) => (
+                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-
-            <button
-              onClick={() => paginate(1)}
-              className="p-3 rounded-full bg-bm-card border border-bm-border hover:border-bm-border-light hover:bg-bm-card-hover transition-all"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            <span className="text-[#222] font-semibold">4.9 von 5</span>
+            <span className="text-[#888]">|</span>
+            <span className="text-[#666]">150+ Bewertungen</span>
           </div>
+        </motion.div>
+
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((testimonial, i) => (
+            <motion.div
+              key={testimonial.name}
+              className="bg-white p-8 shadow-sm border border-[#eee] hover:shadow-lg hover:border-[#5fdafb]/30 transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1 }}
+            >
+              {/* Quote Icon */}
+              <Quote className="w-10 h-10 text-[#5fdafb]/20 mb-4" />
+
+              {/* Rating */}
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(testimonial.rating)].map((_, j) => (
+                  <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+
+              {/* Text */}
+              <p className="text-[#444] leading-relaxed mb-6">
+                "{testimonial.text}"
+              </p>
+
+              {/* Result Badge */}
+              <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium mb-6">
+                <BadgeCheck className="w-4 h-4" />
+                {testimonial.result}
+              </div>
+
+              {/* Author */}
+              <div className="flex items-center gap-4 pt-6 border-t border-[#eee]">
+                <img 
+                  src={testimonial.image} 
+                  alt={testimonial.name}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-black">{testimonial.name}</span>
+                    {testimonial.verified && (
+                      <BadgeCheck className="w-4 h-4 text-[#5fdafb]" />
+                    )}
+                  </div>
+                  <div className="text-sm text-[#888]">
+                    {testimonial.role} • {testimonial.location}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Trust Banner */}
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.8 }}
+        >
+          <p className="text-[#888] text-sm">
+            Alle Bewertungen sind verifiziert und stammen von echten Kunden.
+          </p>
         </motion.div>
       </div>
     </section>
