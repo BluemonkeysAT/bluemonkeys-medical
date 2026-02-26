@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
-  // SSR mode for Coolify/Nixpacks
+  output: "standalone",
   images: {
     remotePatterns: [
       {

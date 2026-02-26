@@ -48,6 +48,11 @@
   --color-bm-border: rgba(0, 0, 0, 0.08);
   --color-bm-border-light: rgba(0, 0, 0, 0.12);
 
+  /* V2 Brand Colors - Official Blue Monkeys Blue */
+  --color-bm-blue: #6798df;
+  --color-bm-blue-hover: #5a87d4;
+  --color-bm-blue-light: #e8f0fb;
+
   /* Fonts - Blue Monkeys Brand */
   --font-sans: 'HK Grotesk', system-ui, sans-serif;
   --font-display: 'Rift-Bold', system-ui, sans-serif;
@@ -445,14 +450,20 @@ body {
   display: flex;
   overflow: hidden;
   user-select: none;
-  gap: 2rem;
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .marquee-content {
   display: flex;
-  gap: 2rem;
-  animation: marquee 30s linear infinite;
+  flex-shrink: 0;
+  min-width: max-content;
+  gap: 3rem;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 @keyframes marquee {

@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
+  icons: { icon: "/logo_bm.svg" },
   title: "Blue Monkeys Medical | Premium Marketing für Arztpraxen",
   description:
     "Websites, SEO und Werbung speziell für Ärzte und Zahnärzte. Full-Service Agentur aus Wien. Mehr Patienten. Bessere Patienten.",
@@ -45,10 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         {/* Noise Overlay */}
         <div className="noise" />
-        
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
