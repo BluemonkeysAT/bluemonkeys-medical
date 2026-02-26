@@ -32,7 +32,7 @@ export function HeroV2() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] lg:h-[100svh] flex flex-col bg-white overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col bg-white overflow-hidden"
     >
       {/* Grid background texture */}
       <div
@@ -268,7 +268,7 @@ export function HeroV2() {
 
       {/* ── Carousel — pinned to bottom, always above fold ── */}
       <motion.div
-        className="py-5 lg:py-16 relative z-10 bg-[#1c1d1f]"
+        className="py-5 lg:py-8 relative z-10 bg-[#1c1d1f]"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 1.0 }}
