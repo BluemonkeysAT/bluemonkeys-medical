@@ -32,7 +32,7 @@ export function HeroV2() {
   return (
     <section
       ref={ref}
-      className="relative h-[100svh] flex flex-col bg-white overflow-hidden"
+      className="relative min-h-[100svh] lg:h-[100svh] flex flex-col bg-white overflow-hidden"
     >
       {/* Grid background texture */}
       <div
@@ -47,7 +47,7 @@ export function HeroV2() {
 
       {/* ── Main content ── */}
       <div className="flex-1 flex items-center pt-[72px] min-h-0">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-8 w-full relative z-10 py-6 lg:py-8">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-8 w-full relative z-10 py-4 lg:py-8">
           <div className="grid lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_500px] gap-10 lg:gap-12 items-center">
 
             {/* ── LEFT ── */}
@@ -264,14 +264,14 @@ export function HeroV2() {
 
       {/* ── Carousel — pinned to bottom, always above fold ── */}
       <motion.div
-        className="py-12 lg:py-16 relative z-10 bg-[#1c1d1f]"
+        className="py-5 lg:py-16 relative z-10 bg-[#1c1d1f]"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 1.0 }}
       >
         <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
           <p
-            className="text-center text-sm text-white/30 uppercase tracking-[0.22em] mb-6 font-medium"
+            className="text-center text-sm text-white/30 uppercase tracking-[0.22em] mb-3 lg:mb-6 font-medium"
             style={RIFT}
           >
             Vertrauen von führenden Praxen in DACH
