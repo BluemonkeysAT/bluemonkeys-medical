@@ -132,9 +132,9 @@ export function ReviewsV2() {
                 </div>
 
                 {/* Avatar placeholder */}
-                <div className="shrink-0 flex flex-col items-center gap-1.5">
-                  <div className="w-10 h-10 bg-[#6798df]/20 rounded-full" />
-                  <div className="text-right">
+                <div className="shrink-0 flex flex-row items-center gap-3">
+                  <div className="w-10 h-10 bg-[#6798df]/20 rounded-full shrink-0" />
+                  <div>
                     <p className="text-white text-xs font-bold leading-tight" style={RIFT}>
                       {t.name}
                     </p>
