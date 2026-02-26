@@ -41,8 +41,11 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de">
+      <head>
+        <link rel="preload" href="/fonts/381481_1_0.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/hkgrotesk-regular-webfont.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      </head>
       <body className="font-sans antialiased">
-        {/* Noise Overlay */}
         <div className="noise" />
         {children}
       </body>

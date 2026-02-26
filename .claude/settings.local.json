@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone https://github.com/BluemonkeysAT/bluemonkeys-medical /Users/gregorwallner/WebstormProjects/bluemonkeys-medical --no-checkout 2>&1 || echo \"Directory not empty, trying pull instead\")",
+      "Bash(git init && git remote add origin https://github.com/BluemonkeysAT/bluemonkeys-medical && git pull origin main 2>&1)",
+      "WebSearch",
+      "WebFetch(domain:claude-plugins.dev)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.humanlayer.dev)",
+      "Bash(npm run build 2>&1)",
+      "Bash(npx tsc --noEmit 2>&1 | head -60)",
+      "Bash(node_modules/.bin/next build 2>&1 | tail -40)",
+      "Bash(npm install 2>&1 | tail -10)",
+      "Bash(node_modules/.bin/tsc --noEmit 2>&1 | head -60)",
+      "Bash(node_modules/.bin/next build 2>&1 | tail -30)",
+      "Bash(npm run dev 2>&1)",
+      "Bash(sleep 5 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/v2 2>&1)",
+      "Bash(node_modules/.bin/tsc --noEmit 2>&1 | head -20)",
+      "Bash(node_modules/.bin/tsc --noEmit 2>&1)",
+      "Bash(grep -n \"tracking-\\\\[0.14em\\\\]\\\\|tracking-\\\\[0.12em\\\\]\\\\|tracking-\\\\[0.1em\\\\]\" /Users/gregorwallner/WebstormProjects/bluemonkeys-medical/src/components/sections/v2/*.tsx | grep -v \"//\\\\|button\\\\|tag\\\\|Tag\" | head -40)",
+      "Bash(node_modules/.bin/tsc --noEmit 2>&1; echo \"exit:$?\")",
+      "WebFetch(domain:v2.bluemonkeys.at)",
+      "Bash(curl -s -o /Users/gregorwallner/WebstormProjects/bluemonkeys-medical/public/favicon.ico \"https://www.bluemonkeys.at/favicon.ico\" && echo \"downloaded\" && file /Users/gregorwallner/WebstormProjects/bluemonkeys-medical/public/favicon.ico)",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o /Users/gregorwallner/WebstormProjects/bluemonkeys-medical/public/favicon.ico \"https://www.bluemonkeys.at/favicon.ico\" && echo \"done\" && file /Users/gregorwallner/WebstormProjects/bluemonkeys-medical/public/favicon.ico)",
+      "Bash(git add src/app/globals.css src/app/layout.tsx src/app/page.tsx next.config.ts nixpacks.toml public/favicon.ico public/logo_bm.svg src/app/api/ src/app/v1/ src/app/v2/ src/components/layout/FooterV2.tsx src/components/layout/HeaderV2.tsx src/components/sections/v2/ src/components/ui/ChatWidget.tsx && git status)",
+      "Bash(git add public/hero.mp4)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nfeat: V2 landing page — Blue Monkeys Medical complete rebuild\n\n- V2 is now root \\(/\\), V1 moved to /v1\n- Full V2 section suite: Hero, Loss, Services, Process, Reviews, WhyUs, FAQ, Contact\n- Real brand assets: logo_bm.svg, favicon, hero.mp4, team/brand logos\n- Founder cards with real photos, roles \\(Managing Director, Creative Director, CTO\\)\n- Recruiting added to Services and Contact form; LLM Marketing replaced\n- Merged Neupatienten + Privatpatienten into one form goal\n- ChatWidget \\(floating bottom-right\\), CTABannerV2 removed\n- Marquee CSS hardened \\(no flicker\\), select-all form logic\n- Nixpacks/Coolify deployment: standalone output, HOSTNAME=0.0.0.0\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push && echo \"pushed\")",
+      "Bash(git push --set-upstream origin main && echo \"pushed\")",
+      "Bash(git add -A && git status)"
+    ]
+  }
+}

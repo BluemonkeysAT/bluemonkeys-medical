@@ -39,7 +39,7 @@ export function HeaderV2() {
             <Link href="/" className="flex items-center gap-3 group">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo_bm.svg" alt="Blue Monkeys" className="w-9 h-9 object-contain" />
-              <div className="hidden sm:flex flex-col leading-none">
+              <div className="flex flex-col leading-none">
                 <span className="text-[#1c1d1f] font-bold text-sm uppercase tracking-[0.05em]" style={RIFT}>
                   Blue Monkeys
                 </span>

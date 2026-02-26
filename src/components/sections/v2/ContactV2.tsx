@@ -155,8 +155,8 @@ export function ContactV2() {
             >
               <Shield className="w-5 h-5 text-[#6798df] shrink-0" />
               <p className="text-white/50 text-xs leading-relaxed">
-                <strong className="text-white/80">100% Geld-zurück-Garantie</strong> in den
-                ersten 90 Tagen — wenn wir keine Ergebnisse liefern.
+                <strong className="text-white/80">Antwort in 24h</strong> — persönlich,
+                unverbindlich, ohne Kleingedrucktes.
               </p>
             </motion.div>
           </motion.div>
@@ -224,14 +224,14 @@ export function ContactV2() {
                             <button
                               key={g.id}
                               onClick={() => toggleGoal(g.id)}
-                              className={`flex items-center gap-3 p-4 border-2 text-left transition-all duration-200 ${
+                              className={`flex items-center gap-2 p-3 sm:p-4 border-2 text-left transition-all duration-200 ${
                                 selected
                                   ? "border-[#6798df] bg-[#e8f0fb] text-[#6798df]"
                                   : "border-[#e5e5e5] bg-white text-[#666] hover:border-[#6798df]/40 hover:bg-[#f8f8f8]"
                               }`}
                             >
-                              <g.icon className={`w-5 h-5 shrink-0 ${selected ? "text-[#6798df]" : "text-[#aaa]"}`} />
-                              <span className="text-sm font-semibold leading-tight">{g.label}</span>
+                              <g.icon className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 ${selected ? "text-[#6798df]" : "text-[#aaa]"}`} />
+                              <span className="text-xs sm:text-sm font-semibold leading-tight">{g.label}</span>
                             </button>
                           );
                         })}

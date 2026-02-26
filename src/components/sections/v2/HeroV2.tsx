@@ -73,6 +73,10 @@ export function HeroV2() {
                       alt="Arzt"
                       className="w-8 h-8 rounded-full border-[2px] border-white object-cover"
                       style={{ zIndex: 5 - i }}
+                      loading="lazy"
+                      decoding="async"
+                      width={32}
+                      height={32}
                     />
                   ))}
                 </div>
@@ -196,6 +200,7 @@ export function HeroV2() {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   poster="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=900&q=80&auto=format&fit=crop"
                   className="absolute inset-0 w-full h-full object-cover object-center"
                 >

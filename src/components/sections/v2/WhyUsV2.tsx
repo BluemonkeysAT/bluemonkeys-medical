@@ -85,14 +85,14 @@ export function WhyUsV2() {
               <br />
               <span className="text-[#6798df]">DIE BESTEN.</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-[#666] text-lg leading-relaxed mb-10">
+            <motion.p variants={fadeUp} className="text-[#666] text-lg leading-relaxed mb-10 max-w-full">
               Es gibt hunderte Agenturen in Österreich. Wir sind die einzige, die ausschließlich
               für Ärzte und Zahnärzte arbeitet — und das jeden Tag aufs Neue beweist.
             </motion.p>
 
             {/* Team */}
             <motion.div variants={fadeUp}>
-              <div className="grid grid-cols-2 gap-x-3 gap-y-8 mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-8 mt-8">
                 {team.map((member) => (
                   <div key={member.name} className="flex items-stretch gap-3 pl-3 pr-5 bg-white border border-[#e5e5e5] hover:border-[#6798df] transition-colors duration-200">
                     {/* Cutout photo — bottom flush, top overflows */}
@@ -120,72 +120,76 @@ export function WhyUsV2() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            {/* Table header */}
-            <div className="grid grid-cols-[160px_1px_1fr_1px_1fr] items-center bg-[#1c1d1f] py-3">
-              <span className="text-white/40 text-sm uppercase tracking-[0.1em] px-4" style={RIFT}>
-                Kriterium
-              </span>
-              <div className="bg-white/10 self-stretch" />
-              <span
-                className="text-[#6798df] font-bold text-sm uppercase tracking-[0.1em] px-4 text-center"
-                style={RIFT}
-              >
-                Blue Monkeys
-              </span>
-              <div className="bg-white/10 self-stretch" />
-              <span
-                className="text-white/30 text-sm uppercase tracking-[0.1em] px-4 text-center"
-                style={RIFT}
-              >
-                Andere
-              </span>
+            {/* Horizontal scroll wrapper for mobile */}
+            <div className="overflow-x-auto">
+              <div className="min-w-[460px]">
+                {/* Table header */}
+                <div className="grid grid-cols-[120px_1px_1fr_1px_1fr] items-center bg-[#1c1d1f] py-3">
+                  <span className="text-white/40 text-sm uppercase tracking-[0.1em] px-4" style={RIFT}>
+                    Kriterium
+                  </span>
+                  <div className="bg-white/10 self-stretch" />
+                  <span
+                    className="text-[#6798df] font-bold text-sm uppercase tracking-[0.1em] px-4 text-center"
+                    style={RIFT}
+                  >
+                    Blue Monkeys
+                  </span>
+                  <div className="bg-white/10 self-stretch" />
+                  <span
+                    className="text-white/30 text-sm uppercase tracking-[0.1em] px-4 text-center"
+                    style={RIFT}
+                  >
+                    Andere
+                  </span>
+                </div>
+
+                {/* Rows */}
+                <div className="divide-y divide-[#e5e5e5]">
+                  {differentiators.map((d, i) => (
+                    <motion.div
+                      key={d.feature}
+                      className="grid grid-cols-[120px_1px_1fr_1px_1fr] items-start bg-white hover:bg-[#f8f8f8] transition-colors"
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.4 + i * 0.06 }}
+                    >
+                      <div className="p-3">
+                        <p className="text-[#1c1d1f] font-semibold text-xs leading-snug">
+                          {d.feature}
+                        </p>
+                      </div>
+                      <div className="bg-[#e5e5e5] self-stretch" />
+                      <div className="p-3">
+                        <div className="flex items-start gap-2">
+                          <div className="w-4 h-4 bg-[#6798df] flex items-center justify-center shrink-0 mt-0.5">
+                            <Check className="w-2.5 h-2.5 text-white" />
+                          </div>
+                          <p className="text-[#333] text-xs leading-relaxed">{d.us}</p>
+                        </div>
+                      </div>
+                      <div className="bg-[#e5e5e5] self-stretch" />
+                      <div className="p-3">
+                        <div className="flex items-start gap-2">
+                          <div className="w-4 h-4 bg-[#f5f5f5] flex items-center justify-center shrink-0 mt-0.5">
+                            <X className="w-2.5 h-2.5 text-[#ccc]" />
+                          </div>
+                          <p className="text-[#aaa] text-xs leading-relaxed">{d.them}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {/* Rows */}
-            <div className="divide-y divide-[#e5e5e5]">
-              {differentiators.map((d, i) => (
-                <motion.div
-                  key={d.feature}
-                  className="grid grid-cols-[160px_1px_1fr_1px_1fr] items-start bg-white hover:bg-[#f8f8f8] transition-colors"
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.4 + i * 0.06 }}
-                >
-                  <div className="p-4">
-                    <p className="text-[#1c1d1f] font-semibold text-sm leading-snug">
-                      {d.feature}
-                    </p>
-                  </div>
-                  <div className="bg-[#e5e5e5] self-stretch" />
-                  <div className="p-4">
-                    <div className="flex items-start gap-2">
-                      <div className="w-4 h-4 bg-[#6798df] flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-2.5 h-2.5 text-white" />
-                      </div>
-                      <p className="text-[#333] text-xs leading-relaxed">{d.us}</p>
-                    </div>
-                  </div>
-                  <div className="bg-[#e5e5e5] self-stretch" />
-                  <div className="p-4">
-                    <div className="flex items-start gap-2">
-                      <div className="w-4 h-4 bg-[#f5f5f5] flex items-center justify-center shrink-0 mt-0.5">
-                        <X className="w-2.5 h-2.5 text-[#ccc]" />
-                      </div>
-                      <p className="text-[#aaa] text-xs leading-relaxed">{d.them}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Guarantee note */}
+            {/* Trust note */}
             <div className="bg-[#e8f0fb] border border-[#6798df]/20 p-5 mt-[1px]">
               <p className="text-[#6798df] font-bold text-sm uppercase tracking-[0.06em] mb-1" style={RIFT}>
-                100% Geld-zurück-Garantie
+                Nr. 1 Medizin-Agentur im DACH-Raum
               </p>
               <p className="text-[#555] text-xs leading-relaxed">
-                Wenn wir in den ersten 90 Tagen keine messbaren Ergebnisse liefern, erstatten wir
-                Ihnen die gesamte Gebühr. Keine Fragen, keine Diskussionen.
+                Ausschließlich für Ärzte und Zahnärzte — in 5 Jahren über 50 Praxen auf Wachstumskurs gebracht.
               </p>
             </div>
           </motion.div>
