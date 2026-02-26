@@ -165,7 +165,7 @@ export function HeroV2() {
                   className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 border border-[#1c1d1f] text-[#1c1d1f] font-bold text-xs sm:text-sm uppercase tracking-[0.05em] hover:bg-[#1c1d1f] hover:text-white transition-all duration-300 flex-1 sm:flex-none"
                   style={RIFT}
                 >
-                  <span className="sm:hidden">Cases</span>
+                  <span className="sm:hidden">Referenzen</span>
                   <span className="hidden sm:inline">Erfolgsgeschichten</span>
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform shrink-0" />
                 </a>
