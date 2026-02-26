@@ -182,8 +182,8 @@ export function LossV2() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.55 }}
         >
-          {/* Without */}
-          <div className="bg-white p-7 lg:p-8 border-t-[3px] border-red-400">
+          {/* Without — hidden on mobile */}
+          <div className="hidden md:block bg-white p-7 lg:p-8 border-t-[3px] border-red-400">
             <div className="flex items-center gap-2 text-red-500 font-bold mb-6 text-lg uppercase tracking-[0.08em]" style={RIFT}>
               <X className="w-5 h-5" />
               Ohne Blue Monkeys
