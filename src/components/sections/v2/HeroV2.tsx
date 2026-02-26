@@ -173,15 +173,19 @@ export function HeroV2() {
 
               {/* Trust micro-copy */}
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3 sm:gap-4 justify-center sm:justify-start">
-                {["Unverbindlich", "Keine Kosten", "Antwort in 24h"].map((t) => (
+                {[
+                  { label: "Kostenlos & unverbindlich", mobile: true },
+                  { label: "Antwort innerhalb 24h", mobile: true },
+                  { label: "Nur für Arztpraxen", mobile: false },
+                ].map((t) => (
                   <span
-                    key={t}
-                    className="flex items-center gap-1.5 text-[11px] text-[#aaa] uppercase tracking-[0.06em] font-medium"
+                    key={t.label}
+                    className={`${t.mobile ? "flex" : "hidden sm:flex"} items-center gap-1.5 text-[11px] text-[#aaa] uppercase tracking-[0.06em] font-medium`}
                   >
                     <span className="w-3.5 h-3.5 flex items-center justify-center bg-emerald-50 text-emerald-600 text-[9px] font-bold">
                       ✓
                     </span>
-                    {t}
+                    {t.label}
                   </span>
                 ))}
               </motion.div>
