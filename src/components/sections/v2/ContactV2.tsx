@@ -95,7 +95,7 @@ export function ContactV2() {
   };
 
   return (
-    <section ref={ref} id="contact" className="bg-white py-20 lg:py-32">
+    <section ref={ref} id="contact" className="bg-white py-10 lg:py-32">
       <div className="max-w-[1280px] mx-auto">
         <div className="grid lg:grid-cols-[400px_1fr]">
 
@@ -104,7 +104,7 @@ export function ContactV2() {
             variants={staggerContainer}
             initial="initial"
             animate={isInView ? "animate" : "initial"}
-            className="bg-[#1c1d1f] text-white px-8 py-10 lg:px-10 lg:py-12 relative"
+            className="bg-[#1c1d1f] text-white px-6 py-8 lg:px-10 lg:py-12 relative"
           >
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#6798df]" />
 
@@ -124,13 +124,13 @@ export function ContactV2() {
               <br />
               <span className="text-[#6798df]">MEHR PATIENTEN?</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-white/50 text-sm leading-relaxed mb-10">
+            <motion.p variants={fadeUp} className="text-white/50 text-sm leading-relaxed mb-6 lg:mb-10">
               Starten Sie mit einer kostenlosen Praxis-Analyse. Unverbindlich, persönlich,
               konkret — in 24 Stunden melden wir uns bei Ihnen.
             </motion.p>
 
-            {/* Next steps */}
-            <motion.div variants={fadeUp} className="mb-10">
+            {/* Next steps — hidden on mobile to keep form compact */}
+            <motion.div variants={fadeUp} className="mb-6 lg:mb-10 hidden lg:block">
               <p className="text-white/30 text-[10px] uppercase tracking-[0.12em] mb-4" style={RIFT}>
                 Was passiert als Nächstes
               </p>
@@ -166,12 +166,12 @@ export function ContactV2() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
-            className="px-8 py-16 lg:px-12 lg:py-20 bg-[#f8f8f8]"
+            className="px-6 py-8 lg:px-12 lg:py-20 bg-[#f8f8f8]"
           >
             {!success ? (
               <>
                 {/* Progress — 2 steps */}
-                <div className="flex items-center gap-3 mb-10">
+                <div className="flex items-center gap-3 mb-6 lg:mb-10">
                   {[1, 2].map((n) => (
                     <div key={n} className="flex items-center gap-3">
                       <div
@@ -214,10 +214,10 @@ export function ContactV2() {
                       <h3 className="text-[#1c1d1f] font-bold text-lg uppercase mb-1" style={RIFT}>
                         Was möchten Sie erreichen?
                       </h3>
-                      <p className="text-[#888] text-sm mb-8">
+                      <p className="text-[#888] text-sm mb-5 lg:mb-8">
                         Wählen Sie alles, was auf Sie zutrifft — Mehrfachauswahl möglich.
                       </p>
-                      <div className="grid grid-cols-2 gap-3 mb-8">
+                      <div className="grid grid-cols-2 gap-2 lg:gap-3 mb-5 lg:mb-8">
                         {goalOptions.map((g) => {
                           const selected = isSelected(g.id);
                           return (
@@ -260,10 +260,10 @@ export function ContactV2() {
                       <h3 className="text-[#1c1d1f] font-bold text-lg uppercase mb-1" style={RIFT}>
                         Wie können wir Sie erreichen?
                       </h3>
-                      <p className="text-[#888] text-sm mb-8">
+                      <p className="text-[#888] text-sm mb-5 lg:mb-8">
                         Wir schreiben Ihnen per WhatsApp — innerhalb von 24 Stunden.
                       </p>
-                      <div className="space-y-5 mb-6">
+                      <div className="space-y-4 lg:space-y-5 mb-5 lg:mb-6">
                         <div>
                           <label className="block text-xs font-bold uppercase tracking-[0.08em] text-[#555] mb-2" style={RIFT}>
                             Ihr Name (optional)
