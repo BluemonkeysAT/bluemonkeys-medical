@@ -119,10 +119,9 @@ export function WhyUsV2() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
+            className="overflow-x-auto"
           >
-            {/* Horizontal scroll wrapper for mobile */}
-            <div className="overflow-x-auto">
-              <div className="min-w-[460px]">
+            <div className="min-w-[460px]">
                 {/* Table header */}
                 <div className="grid grid-cols-[120px_1px_1fr_1px_1fr] items-center bg-[#1c1d1f] py-3">
                   <span className="text-white/40 text-sm uppercase tracking-[0.1em] px-4" style={RIFT}>
@@ -180,7 +179,6 @@ export function WhyUsV2() {
                     </motion.div>
                   ))}
                 </div>
-              </div>
             </div>
 
             {/* Trust note */}
