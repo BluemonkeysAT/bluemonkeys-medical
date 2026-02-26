@@ -174,7 +174,7 @@ export function HeroV2() {
               {/* Trust micro-copy */}
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3 sm:gap-4 justify-center sm:justify-start">
                 {[
-                  { label: "Kostenlos & unverbindlich", mobile: true },
+                  { label: "Gratis Erstgespräch", mobile: true },
                   { label: "Antwort innerhalb 24h", mobile: true },
                   { label: "Nur für Arztpraxen", mobile: false },
                 ].map((t) => (
