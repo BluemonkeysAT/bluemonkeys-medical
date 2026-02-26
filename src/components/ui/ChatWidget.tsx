@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, ArrowRight, Send } from "lucide-react";
 
@@ -8,6 +8,13 @@ const RIFT = { fontFamily: "'Rift-Bold', Impact, sans-serif" };
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleCTA = () => {
     setOpen(false);
@@ -15,8 +22,17 @@ export function ChatWidget() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  if (!visible) return null;
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <AnimatePresence>
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 16 }}
+      transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
+    >
       {/* Expanded panel */}
       <AnimatePresence>
         {open && (
@@ -135,6 +151,7 @@ export function ChatWidget() {
           )}
         </motion.button>
       </div>
-    </div>
+    </motion.div>
+    </AnimatePresence>
   );
 }
