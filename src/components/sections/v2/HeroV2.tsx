@@ -96,7 +96,7 @@ export function HeroV2() {
               <motion.h1
                 variants={fadeUp}
                 className="uppercase leading-[0.9] tracking-tight text-[#1c1d1f] mb-4"
-                style={{ ...RIFT, fontSize: "clamp(2.8rem, 7.5vw, 5rem)" }}
+                style={{ ...RIFT, fontSize: "clamp(3.4rem, 7.5vw, 5rem)" }}
               >
                 IHRE PRAXIS
                 <br />
