@@ -187,7 +187,7 @@ export function ContactV2() {
                         {n < step ? <CheckCircle2 className="w-4 h-4" /> : n}
                       </div>
                       <span
-                        className={`text-xs uppercase tracking-[0.06em] font-medium hidden sm:block ${
+                        className={`text-xs uppercase tracking-[0.06em] font-medium ${
                           n === step ? "text-[#1c1d1f]" : "text-[#ccc]"
                         }`}
                         style={RIFT}
@@ -195,7 +195,7 @@ export function ContactV2() {
                         {n === 1 ? "Ihre Ziele" : "Kontakt"}
                       </span>
                       {n < 2 && (
-                        <div className={`hidden sm:block w-10 h-[2px] ${n < step ? "bg-[#6798df]" : "bg-[#e5e5e5]"}`} />
+                        <div className={`w-8 sm:w-10 h-[2px] ${n < step ? "bg-[#6798df]" : "bg-[#e5e5e5]"}`} />
                       )}
                     </div>
                   ))}
