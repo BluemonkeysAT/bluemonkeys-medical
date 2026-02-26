@@ -126,10 +126,10 @@ export function HeroV2() {
                 </strong>
               </motion.p>
 
-              {/* Stat boxes — mobile only (on desktop they float over the image) */}
+              {/* Stat boxes — hidden on mobile, shown on desktop via floating cards */}
               <motion.div
                 variants={fadeUp}
-                className="grid grid-cols-3 gap-3 mb-7 lg:hidden"
+                className="hidden"
               >
                 {heroStats.map((s) => (
                   <div
@@ -149,28 +149,30 @@ export function HeroV2() {
               </motion.div>
 
               {/* CTAs */}
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-5">
+              <motion.div variants={fadeUp} className="flex flex-row gap-2 sm:gap-3 mb-5">
                 <a
                   href="#contact"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#1c1d1f] text-white font-bold text-sm uppercase tracking-[0.05em] hover:bg-[#6798df] hover:text-[#1c1d1f] transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 bg-[#1c1d1f] text-white font-bold text-xs sm:text-sm uppercase tracking-[0.05em] hover:bg-[#6798df] hover:text-[#1c1d1f] transition-all duration-300 flex-1 sm:flex-none"
                   style={RIFT}
                 >
-                  <Phone className="w-4 h-4" />
-                  Kostenlose Analyse starten
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="sm:hidden">Analyse starten</span>
+                  <span className="hidden sm:inline">Kostenlose Analyse starten</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform shrink-0" />
                 </a>
                 <a
                   href="#cases"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#1c1d1f] text-[#1c1d1f] font-bold text-sm uppercase tracking-[0.05em] hover:bg-[#1c1d1f] hover:text-white transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 border border-[#1c1d1f] text-[#1c1d1f] font-bold text-xs sm:text-sm uppercase tracking-[0.05em] hover:bg-[#1c1d1f] hover:text-white transition-all duration-300 flex-1 sm:flex-none"
                   style={RIFT}
                 >
-                  Erfolgsgeschichten
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span className="sm:hidden">Cases</span>
+                  <span className="hidden sm:inline">Erfolgsgeschichten</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform shrink-0" />
                 </a>
               </motion.div>
 
               {/* Trust micro-copy */}
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-3 sm:gap-4 justify-center sm:justify-start">
                 {["Unverbindlich", "Keine Kosten", "Antwort in 24h"].map((t) => (
                   <span
                     key={t}
