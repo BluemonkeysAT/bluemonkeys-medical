@@ -11,6 +11,11 @@ import {
 
 const RIFT = { fontFamily: "'Rift-Bold', Impact, sans-serif" };
 
+const trustNames = [
+  "Zahnarzt Dr. Reinisch", "Dr. Gradwohl Schönheit", "Zahnwohl Penzing",
+  "Dr. Turkov", "Dr. Matis", "Dr. Miedler", "Dr. Heidi Paul Gynäkologie",
+];
+
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const specialties = [
@@ -77,23 +82,23 @@ export function FunnelPageV2() {
     <div className="min-h-[100svh] bg-[#F8FAFB] flex flex-col">
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <header className="shrink-0 flex items-center justify-between px-4 sm:px-6 h-[52px] bg-white border-b border-[#f2f2f2] z-10">
-        <a href="/" className="flex items-center gap-2">
+      <header className="shrink-0 flex items-center justify-between px-4 sm:px-6 h-[60px] bg-white border-b border-[#f2f2f2] z-10">
+        <a href="/" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo_bm.svg" alt="Blue Monkeys Medical" className="h-6 w-auto" />
+          <img src="/logo_bm.svg" alt="Blue Monkeys Medical" className="h-7 w-auto" />
           <span
-            className="font-bold text-[#1c1d1f] text-[12px] sm:text-[13px] uppercase leading-none"
+            className="font-bold text-[#1c1d1f] text-[14px] sm:text-[15px] uppercase leading-none"
             style={RIFT}
           >
             Blue Monkeys <span className="text-[#6798df]">Medical</span>
           </span>
         </a>
         <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-1.5 text-[11px] text-[#bbb]">
-            <Shield className="w-3 h-3 text-[#6798df]/50" />
+          <div className="hidden sm:flex items-center gap-1.5 text-[12px] text-[#bbb]">
+            <Shield className="w-3.5 h-3.5 text-[#6798df]/50" />
             DSGVO-konform
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] text-[#888] border border-[#efefef] px-2.5 py-1 bg-white">
+          <div className="flex items-center gap-1.5 text-[12px] text-[#888] border border-[#efefef] px-3 py-1.5 bg-white">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Schneller Rückruf
           </div>
@@ -436,6 +441,23 @@ export function FunnelPageV2() {
 
         </div>
       </div>
+      {/* ── Logo marquee ───────────────────────────────────────────────────── */}
+      <div className="shrink-0 py-3 bg-white border-t border-[#f0f0f0]">
+        <div className="marquee">
+          <div className="marquee-content">
+            {[...trustNames, ...trustNames].map((name, i) => (
+              <span
+                key={`${name}-${i}`}
+                className="text-[#1c1d1f]/20 font-bold uppercase text-xs tracking-[0.06em] whitespace-nowrap"
+                style={RIFT}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
