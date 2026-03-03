@@ -39,7 +39,7 @@ const problems = [
 
 interface FormData {
   specialty: string;
-  problem:   string;
+  problems:  string[];
   name:      string;
   phone:     string;
   email:     string;
@@ -51,7 +51,7 @@ interface FormData {
 export function FunnelPageV2() {
   const [step, setStep]             = useState<1 | 2 | 3>(1);
   const [form, setForm]             = useState<FormData>({
-    specialty: "", problem: "", name: "", phone: "", email: "", privacy: false,
+    specialty: "", problems: [], name: "", phone: "", email: "", privacy: false,
   });
   const [submitted, setSubmitted]   = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -272,33 +272,47 @@ export function FunnelPageV2() {
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mb-4">
-                    {problems.map((p) => (
-                      <button
-                        key={p.id}
-                        onClick={() => setForm((f) => ({ ...f, problem: p.id }))}
-                        className={`flex items-center gap-3 px-4 py-3.5 border-2 text-left transition-all ${
-                          form.problem === p.id
-                            ? "border-[#6798df] bg-[#EEF3FC]"
-                            : "border-[#efefef] hover:border-[#6798df]/40 hover:bg-[#F8FBFF]"
-                        }`}
-                      >
-                        <p.icon className={`w-5 h-5 shrink-0 ${form.problem === p.id ? "text-[#6798df]" : "text-[#bbb]"}`} />
-                        <span
-                          className={`text-[11px] font-bold leading-tight ${form.problem === p.id ? "text-[#6798df]" : "text-[#333]"}`}
-                          style={RIFT}
+                    {problems.map((p) => {
+                      const selected = form.problems.includes(p.id);
+                      return (
+                        <button
+                          key={p.id}
+                          onClick={() => setForm((f) => ({
+                            ...f,
+                            problems: selected
+                              ? f.problems.filter((id) => id !== p.id)
+                              : [...f.problems, p.id],
+                          }))}
+                          className={`flex items-center gap-3 px-4 py-3.5 border-2 text-left transition-all ${
+                            selected
+                              ? "border-[#6798df] bg-[#EEF3FC]"
+                              : "border-[#efefef] hover:border-[#6798df]/40 hover:bg-[#F8FBFF]"
+                          }`}
                         >
-                          {p.label}
-                        </span>
-                      </button>
-                    ))}
+                          <p.icon className={`w-5 h-5 shrink-0 ${selected ? "text-[#6798df]" : "text-[#bbb]"}`} />
+                          <span
+                            className={`text-[11px] font-bold leading-tight ${selected ? "text-[#6798df]" : "text-[#333]"}`}
+                            style={RIFT}
+                          >
+                            {p.label}
+                          </span>
+                          {selected && (
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#6798df] ml-auto shrink-0" />
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
                   <button
                     onClick={() => setStep(3)}
-                    disabled={!form.problem}
+                    disabled={form.problems.length === 0}
                     className="w-full flex items-center justify-center gap-2 py-4 bg-[#1c1d1f] text-white font-bold text-sm uppercase tracking-[0.05em] hover:bg-[#6798df] hover:text-[#1c1d1f] transition-all disabled:opacity-20 disabled:cursor-not-allowed"
                     style={RIFT}
                   >
-                    Weiter <ArrowRight className="w-4 h-4" />
+                    {form.problems.length > 1
+                      ? `${form.problems.length} Probleme gewählt`
+                      : "Weiter"
+                    } <ArrowRight className="w-4 h-4" />
                   </button>
                 </motion.div>
               )}
