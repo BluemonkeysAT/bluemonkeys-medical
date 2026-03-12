@@ -189,7 +189,7 @@ export function FunnelPageV2() {
                   style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
                 >
                   <p
-                    className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#1c1d1f] mb-3 lg:mb-4"
+                    className="text-[13px] lg:text-[18px] font-bold uppercase tracking-[0.06em] text-[#1c1d1f] mb-3 lg:mb-4"
                     style={RIFT}
                   >
                     Schritt 1 — Welche Fachrichtung?
@@ -267,7 +267,7 @@ export function FunnelPageV2() {
                       <ChevronLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                     </button>
                     <p
-                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#1c1d1f]"
+                      className="text-[13px] lg:text-[18px] font-bold uppercase tracking-[0.06em] text-[#1c1d1f]"
                       style={RIFT}
                     >
                       Schritt 2 — Was ist Ihr Hauptproblem?
@@ -338,7 +338,7 @@ export function FunnelPageV2() {
                       <ChevronLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                     </button>
                     <p
-                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#1c1d1f]"
+                      className="text-[13px] lg:text-[18px] font-bold uppercase tracking-[0.06em] text-[#1c1d1f]"
                       style={RIFT}
                     >
                       Schritt 3 — Wie erreichen wir Sie?
