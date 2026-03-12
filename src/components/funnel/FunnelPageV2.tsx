@@ -83,23 +83,23 @@ export function FunnelPageV2() {
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header className="shrink-0 bg-white border-b border-[#f2f2f2] z-10">
-        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-[60px] lg:h-[68px] max-w-[1200px] mx-auto w-full">
-        <a href="/" className="flex items-center gap-2.5 lg:gap-3">
+        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 h-[60px] lg:h-[76px] max-w-[1200px] mx-auto w-full">
+        <a href="/" className="flex items-center gap-2.5 lg:gap-3.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo_bm.svg" alt="Blue Monkeys Medical" className="h-7 lg:h-8 w-auto" />
+          <img src="/logo_bm.svg" alt="Blue Monkeys Medical" className="h-7 lg:h-9 w-auto" />
           <span
-            className="font-bold text-[#1c1d1f] text-[14px] sm:text-[15px] lg:text-[17px] uppercase leading-none"
+            className="font-bold text-[#1c1d1f] text-[14px] sm:text-[15px] lg:text-[19px] uppercase leading-none"
             style={RIFT}
           >
             Blue Monkeys <span className="text-[#6798df]">Medical</span>
           </span>
         </a>
-        <div className="flex items-center gap-3 lg:gap-4">
-          <div className="hidden sm:flex items-center gap-1.5 text-[12px] lg:text-[13px] text-[#bbb]">
-            <Shield className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#6798df]/50" />
+        <div className="flex items-center gap-3 lg:gap-5">
+          <div className="hidden sm:flex items-center gap-1.5 text-[12px] lg:text-[14px] text-[#bbb]">
+            <Shield className="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5 text-[#6798df]/50" />
             DSGVO-konform
           </div>
-          <div className="flex items-center gap-1.5 text-[12px] lg:text-[13px] text-[#888] border border-[#efefef] px-3 py-1.5 lg:px-4 lg:py-2 bg-white">
+          <div className="flex items-center gap-1.5 text-[12px] lg:text-[14px] text-[#888] border border-[#efefef] px-3 py-1.5 lg:px-5 lg:py-2.5 bg-white">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Schneller Rückruf
           </div>
@@ -108,22 +108,22 @@ export function FunnelPageV2() {
       </header>
 
       {/* ── Content ────────────────────────────────────────────────────────── */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 lg:py-10">
-        <div className="w-full max-w-sm lg:max-w-[480px]">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 lg:py-12">
+        <div className="w-full max-w-sm lg:max-w-[560px]">
 
           {/* Intro headline — hidden after submit */}
           {!submitted && (
             <div className="mb-5">
               <p
-                className="text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.12em] text-[#6798df] mb-1.5 lg:mb-2"
+                className="text-[11px] lg:text-[14px] font-bold uppercase tracking-[0.12em] text-[#6798df] mb-1.5 lg:mb-2.5"
                 style={RIFT}
               >
                 Kostenlos &amp; unverbindlich
               </p>
-              <h1 className="text-[34px] sm:text-[40px] lg:text-[48px] text-[#1c1d1f] leading-none mb-2 lg:mb-3" style={RIFT}>
+              <h1 className="text-[34px] sm:text-[40px] lg:text-[56px] text-[#1c1d1f] leading-none mb-2 lg:mb-4" style={RIFT}>
                 Mehr Neupatienten<br />in 6 Wochen.
               </h1>
-              <p className="text-sm lg:text-base text-[#888] leading-snug">
+              <p className="text-sm lg:text-lg text-[#888] leading-snug">
                 Persönliche Strategie für Ihre Praxis — Rückruf in 24h.
               </p>
             </div>
@@ -153,22 +153,22 @@ export function FunnelPageV2() {
                   key="success"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="px-5 py-8 lg:px-8 lg:py-12 text-center"
+                  className="px-5 py-8 lg:px-10 lg:py-14 text-center"
                 >
-                  <div className="w-12 h-12 lg:w-16 lg:h-16 bg-[#EEF3FC] flex items-center justify-center mx-auto mb-4 lg:mb-5">
-                    <CheckCircle2 className="w-6 h-6 lg:w-8 lg:h-8 text-[#6798df]" />
+                  <div className="w-12 h-12 lg:w-20 lg:h-20 bg-[#EEF3FC] flex items-center justify-center mx-auto mb-4 lg:mb-5">
+                    <CheckCircle2 className="w-6 h-6 lg:w-10 lg:h-10 text-[#6798df]" />
                   </div>
-                  <h2 className="text-[22px] lg:text-[28px] text-[#1c1d1f] leading-tight mb-2 lg:mb-3" style={RIFT}>
+                  <h2 className="text-[22px] lg:text-[32px] text-[#1c1d1f] leading-tight mb-2 lg:mb-3" style={RIFT}>
                     Anfrage erhalten!
                   </h2>
-                  <p className="text-[13px] lg:text-[15px] text-[#666] leading-snug mb-5 lg:mb-6">
+                  <p className="text-[13px] lg:text-[17px] text-[#666] leading-snug mb-5 lg:mb-6">
                     Wir melden uns in{" "}
                     <strong className="text-[#1c1d1f]">24 Stunden</strong>{" "}
                     mit Ihrem persönlichen Strategieplan.
                   </p>
                   <div className="flex justify-center gap-4 lg:gap-5">
                     {["Kostenlos", "DSGVO-konform", "Unverbindlich"].map((t) => (
-                      <span key={t} className="flex items-center gap-1 text-[10px] lg:text-[12px] text-[#bbb]">
+                      <span key={t} className="flex items-center gap-1 text-[10px] lg:text-[14px] text-[#bbb]">
                         <CheckCircle2 className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-[#6798df]" />
                         {t}
                       </span>
@@ -185,11 +185,11 @@ export function FunnelPageV2() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -16 }}
                   transition={{ duration: 0.18 }}
-                  className="px-4 sm:px-5 lg:px-7 pt-4 lg:pt-6"
+                  className="px-4 sm:px-5 lg:px-9 pt-4 lg:pt-8"
                   style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
                 >
                   <p
-                    className="text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.09em] text-[#aaa] mb-3 lg:mb-4"
+                    className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#aaa] mb-3 lg:mb-4"
                     style={RIFT}
                   >
                     Schritt 1 — Welche Fachrichtung?
@@ -203,15 +203,15 @@ export function FunnelPageV2() {
                           setForm((f) => ({ ...f, specialty: s.id }));
                           setTimeout(() => setStep(2), 220);
                         }}
-                        className={`flex flex-col items-center gap-2 lg:gap-3 py-4 lg:py-5 px-2 border-2 transition-all ${
+                        className={`flex flex-col items-center gap-2 lg:gap-3.5 py-4 lg:py-6 px-2 lg:px-3 border-2 transition-all ${
                           form.specialty === s.id
                             ? "border-[#6798df] bg-[#EEF3FC]"
                             : "border-[#efefef] hover:border-[#6798df]/40 hover:bg-[#F8FBFF]"
                         }`}
                       >
-                        <s.icon className={`w-6 h-6 lg:w-7 lg:h-7 ${form.specialty === s.id ? "text-[#6798df]" : "text-[#bbb]"}`} />
+                        <s.icon className={`w-6 h-6 lg:w-8 lg:h-8 ${form.specialty === s.id ? "text-[#6798df]" : "text-[#bbb]"}`} />
                         <span
-                          className={`text-[11px] lg:text-[13px] font-bold leading-tight text-center ${form.specialty === s.id ? "text-[#6798df]" : "text-[#333]"}`}
+                          className={`text-[11px] lg:text-[15px] font-bold leading-tight text-center ${form.specialty === s.id ? "text-[#6798df]" : "text-[#333]"}`}
                           style={RIFT}
                         >
                           {s.label}
@@ -228,15 +228,15 @@ export function FunnelPageV2() {
                           setForm((f) => ({ ...f, specialty: s.id }));
                           setTimeout(() => setStep(2), 220);
                         }}
-                        className={`flex flex-col items-center gap-2 lg:gap-3 py-4 lg:py-5 px-2 border-2 transition-all ${
+                        className={`flex flex-col items-center gap-2 lg:gap-3.5 py-4 lg:py-6 px-2 lg:px-3 border-2 transition-all ${
                           form.specialty === s.id
                             ? "border-[#6798df] bg-[#EEF3FC]"
                             : "border-[#efefef] hover:border-[#6798df]/40 hover:bg-[#F8FBFF]"
                         }`}
                       >
-                        <s.icon className={`w-6 h-6 lg:w-7 lg:h-7 ${form.specialty === s.id ? "text-[#6798df]" : "text-[#bbb]"}`} />
+                        <s.icon className={`w-6 h-6 lg:w-8 lg:h-8 ${form.specialty === s.id ? "text-[#6798df]" : "text-[#bbb]"}`} />
                         <span
-                          className={`text-[11px] lg:text-[13px] font-bold leading-tight text-center ${form.specialty === s.id ? "text-[#6798df]" : "text-[#333]"}`}
+                          className={`text-[11px] lg:text-[15px] font-bold leading-tight text-center ${form.specialty === s.id ? "text-[#6798df]" : "text-[#333]"}`}
                           style={RIFT}
                         >
                           {s.label}
@@ -256,7 +256,7 @@ export function FunnelPageV2() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -16 }}
                   transition={{ duration: 0.18 }}
-                  className="px-4 sm:px-5 lg:px-7 pt-4 lg:pt-6"
+                  className="px-4 sm:px-5 lg:px-9 pt-4 lg:pt-8"
                   style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
                 >
                   <div className="flex items-center gap-1.5 mb-3 lg:mb-4">
@@ -267,7 +267,7 @@ export function FunnelPageV2() {
                       <ChevronLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                     </button>
                     <p
-                      className="text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.09em] text-[#aaa]"
+                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#aaa]"
                       style={RIFT}
                     >
                       Schritt 2 — Was ist Ihr Hauptproblem?
@@ -285,15 +285,15 @@ export function FunnelPageV2() {
                               ? f.problems.filter((id) => id !== p.id)
                               : [...f.problems, p.id],
                           }))}
-                          className={`flex items-center gap-3 px-4 py-3.5 lg:px-5 lg:py-4.5 border-2 text-left transition-all ${
+                          className={`flex items-center gap-3 px-4 py-3.5 lg:px-6 lg:py-5 border-2 text-left transition-all ${
                             selected
                               ? "border-[#6798df] bg-[#EEF3FC]"
                               : "border-[#efefef] hover:border-[#6798df]/40 hover:bg-[#F8FBFF]"
                           }`}
                         >
-                          <p.icon className={`w-5 h-5 lg:w-6 lg:h-6 shrink-0 ${selected ? "text-[#6798df]" : "text-[#bbb]"}`} />
+                          <p.icon className={`w-5 h-5 lg:w-7 lg:h-7 shrink-0 ${selected ? "text-[#6798df]" : "text-[#bbb]"}`} />
                           <span
-                            className={`text-[11px] lg:text-[13px] font-bold leading-tight ${selected ? "text-[#6798df]" : "text-[#333]"}`}
+                            className={`text-[11px] lg:text-[15px] font-bold leading-tight ${selected ? "text-[#6798df]" : "text-[#333]"}`}
                             style={RIFT}
                           >
                             {p.label}
@@ -308,7 +308,7 @@ export function FunnelPageV2() {
                   <button
                     onClick={() => setStep(3)}
                     disabled={form.problems.length === 0}
-                    className="w-full flex items-center justify-center gap-2 py-4 lg:py-5 bg-[#1c1d1f] text-white font-bold text-sm lg:text-base uppercase tracking-[0.05em] hover:bg-[#6798df] hover:text-[#1c1d1f] transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 py-4 lg:py-5.5 bg-[#1c1d1f] text-white font-bold text-sm lg:text-[17px] uppercase tracking-[0.05em] hover:bg-[#6798df] hover:text-[#1c1d1f] transition-all disabled:opacity-20 disabled:cursor-not-allowed"
                     style={RIFT}
                   >
                     {form.problems.length > 1
@@ -327,7 +327,7 @@ export function FunnelPageV2() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -16 }}
                   transition={{ duration: 0.18 }}
-                  className="px-4 sm:px-5 lg:px-7 pt-4 lg:pt-6"
+                  className="px-4 sm:px-5 lg:px-9 pt-4 lg:pt-8"
                   style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
                 >
                   <div className="flex items-center gap-1.5 mb-3 lg:mb-4">
@@ -338,7 +338,7 @@ export function FunnelPageV2() {
                       <ChevronLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                     </button>
                     <p
-                      className="text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.09em] text-[#aaa]"
+                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#aaa]"
                       style={RIFT}
                     >
                       Schritt 3 — Wie erreichen wir Sie?
@@ -349,20 +349,20 @@ export function FunnelPageV2() {
                     {/* Phone — required */}
                     <div>
                       <label
-                        className="block text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.07em] text-[#888] mb-1 lg:mb-1.5"
+                        className="block text-[11px] lg:text-[14px] font-bold uppercase tracking-[0.07em] text-[#888] mb-1 lg:mb-1.5"
                         style={RIFT}
                       >
                         Handynummer *
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 lg:w-5 lg:h-5 text-[#bbb] pointer-events-none" />
+                        <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 lg:w-5.5 lg:h-5.5 text-[#bbb] pointer-events-none" />
                         <input
                           type="tel"
                           placeholder="+43 123 456 789"
                           value={form.phone}
                           onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                           autoFocus
-                          className="w-full pl-10 lg:pl-12 pr-3 py-3.5 lg:py-4 text-[#1c1d1f] text-sm lg:text-base border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
+                          className="w-full pl-10 lg:pl-14 pr-3 py-3.5 lg:py-4.5 text-[#1c1d1f] text-sm lg:text-[17px] border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
                         />
                       </div>
                     </div>
@@ -371,7 +371,7 @@ export function FunnelPageV2() {
                     <div className="grid grid-cols-2 gap-2 lg:gap-3">
                       <div>
                         <label
-                          className="block text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.07em] text-[#bbb] mb-1 lg:mb-1.5"
+                          className="block text-[11px] lg:text-[14px] font-bold uppercase tracking-[0.07em] text-[#bbb] mb-1 lg:mb-1.5"
                           style={RIFT}
                         >
                           Name
@@ -381,12 +381,12 @@ export function FunnelPageV2() {
                           placeholder="Optional"
                           value={form.name}
                           onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                          className="w-full px-3.5 py-3 lg:py-3.5 text-[#1c1d1f] text-sm lg:text-base border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
+                          className="w-full px-3.5 py-3 lg:py-4 text-[#1c1d1f] text-sm lg:text-[17px] border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
                         />
                       </div>
                       <div>
                         <label
-                          className="block text-[11px] lg:text-[13px] font-bold uppercase tracking-[0.07em] text-[#bbb] mb-1 lg:mb-1.5"
+                          className="block text-[11px] lg:text-[14px] font-bold uppercase tracking-[0.07em] text-[#bbb] mb-1 lg:mb-1.5"
                           style={RIFT}
                         >
                           E-Mail
@@ -396,7 +396,7 @@ export function FunnelPageV2() {
                           placeholder="Optional"
                           value={form.email}
                           onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                          className="w-full px-3.5 py-3 lg:py-3.5 text-[#1c1d1f] text-sm lg:text-base border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
+                          className="w-full px-3.5 py-3 lg:py-4 text-[#1c1d1f] text-sm lg:text-[17px] border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
                         />
                       </div>
                     </div>
@@ -409,7 +409,7 @@ export function FunnelPageV2() {
                         onChange={(e) => setForm((f) => ({ ...f, privacy: e.target.checked }))}
                         className="mt-0.5 w-4 h-4 lg:w-5 lg:h-5 accent-[#6798df] cursor-pointer shrink-0"
                       />
-                      <span className="text-xs lg:text-sm text-[#aaa] leading-relaxed group-hover:text-[#666] transition-colors">
+                      <span className="text-xs lg:text-[15px] text-[#aaa] leading-relaxed group-hover:text-[#666] transition-colors">
                         Ich stimme der{" "}
                         <a href="/datenschutz" className="text-[#6798df] hover:underline">
                           Datenschutzerklärung
@@ -428,7 +428,7 @@ export function FunnelPageV2() {
                   <button
                     onClick={handleSubmit}
                     disabled={submitting || !canSubmit()}
-                    className="w-full flex items-center justify-center gap-2 py-4 lg:py-5 bg-[#6798df] text-white font-bold text-sm lg:text-base uppercase tracking-[0.05em] hover:bg-[#1c1d1f] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 py-4 lg:py-5.5 bg-[#6798df] text-white font-bold text-sm lg:text-[17px] uppercase tracking-[0.05em] hover:bg-[#1c1d1f] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                     style={RIFT}
                   >
                     {submitting ? (
@@ -447,7 +447,7 @@ export function FunnelPageV2() {
           {!submitted && (
             <div className="flex items-center justify-center gap-5 lg:gap-6 mt-4 lg:mt-5">
               {["Kostenlos", "DSGVO-konform", "Unverbindlich"].map((t) => (
-                <span key={t} className="flex items-center gap-1 text-[10px] lg:text-[12px] text-[#bbb]">
+                <span key={t} className="flex items-center gap-1 text-[10px] lg:text-[14px] text-[#bbb]">
                   <CheckCircle2 className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-[#6798df]/60" />
                   {t}
                 </span>
@@ -465,7 +465,7 @@ export function FunnelPageV2() {
             {[...trustNames, ...trustNames].map((name, i) => (
               <span
                 key={`${name}-${i}`}
-                className="text-[#1c1d1f]/20 font-bold uppercase text-xs lg:text-sm tracking-[0.06em] whitespace-nowrap"
+                className="text-[#1c1d1f]/20 font-bold uppercase text-xs lg:text-base tracking-[0.06em] whitespace-nowrap"
                 style={RIFT}
               >
                 {name}
@@ -492,17 +492,17 @@ function SocialProof() {
             key={img}
             src={`https://i.pravatar.cc/40?img=${img}`}
             alt=""
-            className="w-5 h-5 lg:w-6 lg:h-6 rounded-full object-cover"
+            className="w-5 h-5 lg:w-7 lg:h-7 rounded-full object-cover"
             style={{ border: "2px solid white", zIndex: 5 - i }}
             loading="lazy"
             decoding="async"
           />
         ))}
       </div>
-      <p className="text-[10px] lg:text-[12px] text-[#bbb]">
+      <p className="text-[10px] lg:text-[14px] text-[#bbb]">
         <strong className="text-[#888]">50+ Praxen</strong> ·{" "}
         <span className="inline-flex gap-px">
-          {[1,2,3,4,5].map((i) => <Star key={i} className="w-2.5 h-2.5 lg:w-3 lg:h-3 fill-amber-400 text-amber-400" />)}
+          {[1,2,3,4,5].map((i) => <Star key={i} className="w-2.5 h-2.5 lg:w-3.5 lg:h-3.5 fill-amber-400 text-amber-400" />)}
         </span>
         {" "}5.0
       </p>
