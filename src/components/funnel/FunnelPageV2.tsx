@@ -13,7 +13,7 @@ const RIFT = { fontFamily: "'Rift-Bold', Impact, sans-serif" };
 
 const trustNames = [
   "Zahnarzt Dr. Reinisch", "Dr. Gradwohl Schönheit", "Zahnwohl Penzing",
-  "Dr. Turkov", "Dr. Matis", "Dr. Miedler", "Dr. Heidi Paul Gynäkologie",
+  "Dr. Matis", "Dr. Miedler", "Dr. Heidi Paul Gynäkologie",
 ];
 
 // ── Data ─────────────────────────────────────────────────────────────────────
@@ -57,7 +57,7 @@ export function FunnelPageV2() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError]           = useState("");
 
-  const canSubmit = () => !!form.phone.trim() && form.privacy;
+  const canSubmit = () => !!form.phone.trim() && !!form.name.trim() && form.privacy;
 
   const handleSubmit = async () => {
     if (!canSubmit()) return;
@@ -189,7 +189,7 @@ export function FunnelPageV2() {
                   style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
                 >
                   <p
-                    className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#aaa] mb-3 lg:mb-4"
+                    className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#1c1d1f] mb-3 lg:mb-4"
                     style={RIFT}
                   >
                     Schritt 1 — Welche Fachrichtung?
@@ -267,7 +267,7 @@ export function FunnelPageV2() {
                       <ChevronLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                     </button>
                     <p
-                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#aaa]"
+                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#1c1d1f]"
                       style={RIFT}
                     >
                       Schritt 2 — Was ist Ihr Hauptproblem?
@@ -338,7 +338,7 @@ export function FunnelPageV2() {
                       <ChevronLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                     </button>
                     <p
-                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#aaa]"
+                      className="text-[11px] lg:text-[15px] font-bold uppercase tracking-[0.09em] text-[#1c1d1f]"
                       style={RIFT}
                     >
                       Schritt 3 — Wie erreichen wir Sie?
@@ -371,14 +371,14 @@ export function FunnelPageV2() {
                     <div className="grid grid-cols-2 gap-2 lg:gap-3">
                       <div>
                         <label
-                          className="block text-[11px] lg:text-[14px] font-bold uppercase tracking-[0.07em] text-[#bbb] mb-1 lg:mb-1.5"
+                          className="block text-[11px] lg:text-[14px] font-bold uppercase tracking-[0.07em] text-[#888] mb-1 lg:mb-1.5"
                           style={RIFT}
                         >
-                          Name
+                          Name *
                         </label>
                         <input
                           type="text"
-                          placeholder="Optional"
+                          placeholder="Ihr Name"
                           value={form.name}
                           onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                           className="w-full px-3.5 py-3 lg:py-4 text-[#1c1d1f] text-sm lg:text-[17px] border-2 border-[#e5e5e5] bg-white outline-none focus:border-[#6798df] transition-colors"
@@ -411,7 +411,7 @@ export function FunnelPageV2() {
                       />
                       <span className="text-xs lg:text-[15px] text-[#aaa] leading-relaxed group-hover:text-[#666] transition-colors">
                         Ich stimme der{" "}
-                        <a href="/datenschutz" className="text-[#6798df] hover:underline">
+                        <a href="https://www.bluemonkeys.at/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-[#6798df] hover:underline">
                           Datenschutzerklärung
                         </a>{" "}
                         zu. *
@@ -434,7 +434,7 @@ export function FunnelPageV2() {
                     {submitting ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
-                      <>Jetzt Analyse anfordern <ArrowRight className="w-4 h-4" /></>
+                      <>Jetzt Rückruf anfordern <ArrowRight className="w-4 h-4" /></>
                     )}
                   </button>
                 </motion.div>
